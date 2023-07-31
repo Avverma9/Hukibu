@@ -4,6 +4,7 @@ const task=require("../Controllers/taskController")
 const enquiry= require("../Controllers/enquiryController.js")
 const content = require("../Controllers/contentController")
 const message= require("../Controllers/messageController")
+const survey= require("../Controllers/surveyController")
 
 
 //========================task==========================//
@@ -21,4 +22,8 @@ router.delete("/delete/content/:id",content.deleteContent)
 //=====================message=================================//\
 router.post("/create/message",message.createMessage)
 router.get("/get/message",message.getMessage)
+//=======================survery==================================//
+router.post("/create/survey",survey.createSurvey)
+router.get("/get/survey",survey.getSurvey)
+router.delete("/delete/survey",survey.deleteSurvey)
 module.exports=router
