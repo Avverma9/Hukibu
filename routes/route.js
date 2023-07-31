@@ -3,6 +3,7 @@ const router=express.Router()
 const task=require("../Controllers/taskController")
 const enquiry= require("../Controllers/enquiryController.js")
 const content = require("../Controllers/contentController")
+const message= require("../Controllers/messageController")
 
 
 //========================task==========================//
@@ -17,5 +18,7 @@ router.delete("/delete/enq/:id",enquiry.deleteEnquiry)
 router.post("/create/content",content.createContent)
 router.get("/get/content",content.getContent)
 router.delete("/delete/content/:id",content.deleteContent)
-//======================================================//
+//=====================message=================================//\
+router.post("/create/message",message.createMessage)
+router.get("/get/message",message.getMessage)
 module.exports=router
