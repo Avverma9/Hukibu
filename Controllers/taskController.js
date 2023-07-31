@@ -9,4 +9,9 @@ const getTask= async function (req,res){
     const gettingData= await taskModel.find()
     res.json(gettingData)
 }
-module.exports={createTask,getTask}
+const deleteTask=async(req,res)=>{
+    const {id}=req.params
+    const deleted= await taskModel.findByIdAndDelete(id)
+    res.status(200).json(`the data related with ${id} has been deleted`)
+}
+module.exports={createTask,getTask,deleteTask}
