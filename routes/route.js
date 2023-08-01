@@ -10,9 +10,9 @@ const survey= require("../Controllers/surveyController")
 //========================task==========================//
 router.post("/task",task.createTask)
 router.get("/get/task",task.getTask)
-router.delete("/delete/task",task.deleteTask)
+router.delete("/delete/task/:id",task.deleteTask)
 //====================enquiry========================//
-router.post("/create/enq",enquiry.createEnquiry)
+router.post("/create/enq/:id",enquiry.createEnquiry)
 router.get("/get/enq",enquiry.getEnquiry)
 router.delete("/delete/enq/:id",enquiry.deleteEnquiry)
 //===================content======================//
@@ -25,5 +25,5 @@ router.get("/get/message",message.getMessage)
 //=======================survery==================================//
 router.post("/create/survey",survey.createSurvey)
 router.get("/get/survey",survey.getSurvey)
-router.delete("/delete/survey",survey.deleteSurvey)
+router.delete("/delete/survey/:id",survey.deleteSurvey)
 module.exports=router

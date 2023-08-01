@@ -4,7 +4,8 @@ const createMessage= async function(req,res){
 try{
     const {username,message}=req.body
     const created= await messageModel.create({username,message})
-    res.status(201).json(created)
+    const updatedmessage = await messageModel.find({})
+    res.status(201).json(updatedmessage)
 }catch(error){
     console.error(error)
 }
