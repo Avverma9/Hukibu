@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import { Modal, Button, Form, Spinner } from 'react-bootstrap';
 import { toast } from 'react-toastify';
@@ -76,7 +76,7 @@ const User = () => {
 
     return (
         <div className="container mt-5">
-            <h2 className="mb-3">User Data</h2>
+            <h2 className="mb-3">Courses Data</h2>
             {userData.length > 0 ? (
                 <table className="table table-bordered">
                     <thead>
