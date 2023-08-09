@@ -1,0 +1,79 @@
+/* Contents.module.css */
+.h2title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .main {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .imagediv {
+    flex: 0 0 50px;
+    margin-right: 10px;
+  }
+  
+  .image {
+    width: 100%;
+    border-radius: 50%;
+  }
+  
+  .content {
+    flex: 1;
+  }
+  
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .tags {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  .buttons {
+    display: flex;
+    margin-top: 10px;
+  }
+  
+  .answerbtn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .seemorebtn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .modal-title {
+    font-size: 1.25rem;
+  }
+  
+  .modal-footer {
+    justify-content: space-between;
+  }
+  
