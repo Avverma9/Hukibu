@@ -81,6 +81,11 @@ const Header = () => {
               Activities
             </a>
           </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/all-instructor">
+              Instructor
+            </a>
+          </li>
         </ul>
       </div>
     </nav>

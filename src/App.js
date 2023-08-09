@@ -16,6 +16,7 @@ import Welcome from "./Components/Welcome/Welcome";
 import GetCourses from "./Components/Courses/getCourses";
 import Activities from "./Components/Activities/Activities";
 import SingleActivities from "./Components/Activities/SingleActivities";
+import { Instructor } from "./Components/Instructor/Instructor";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/get-courses" element={<GetCourses />} />
           <Route path="/activities" element={<Activities />} />
           <Route path="/activities/:id" element={<SingleActivities />} />
+          <Route path="/all-instructor" element={<Instructor />} />
         </Routes>
       </Router>
     </>
