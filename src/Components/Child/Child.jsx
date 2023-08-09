@@ -4,10 +4,43 @@ import { Updatechild } from "./Updatechild";
 
 export const Child = () => {
   const [childData, setChildData] = useState([]);
+  const [childId, setChildId] = useState(null);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const childEditHandler = (chId) => {
+    setChildId(chId);
+    handleShow();
+  };
+
+  const fetchChilddata = () => {
+    fetch("http://13.127.11.171:3000/admin-getChildByUserId/1")
+      .then((response) => response.json())
+      .then((data) => {
+        setChildData(data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  };
+
+  const childDeleteHandler = async (chId) => {
+    try {
+      const response = await fetch(
+        `http://13.127.11.171:3000/admin-deleteChildByChildId/${chId}`,
+        {
+          method: "GET",
+        }
+      );
+
+      if (response.ok) {
+        console.log(response);
+        fetchChilddata();
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  };
 
   useEffect(() => {
     fetch("http://13.127.11.171:3000/admin-getChildByUserId/1")
@@ -19,9 +52,9 @@ export const Child = () => {
   }, []);
   return (
     <>
-      <Updatechild show={show} handleClose={handleClose} />
+      <Updatechild show={show} handleClose={handleClose} childId={childId} />
       <div className="container mt-5">
-        <h2 className="mb-3">Child Data</h2>
+        <h2 className="mb-3">User Data</h2>
         {childData.length > 0 ? (
           <table className="table table-bordered">
             <thead>
@@ -51,10 +84,18 @@ export const Child = () => {
                   <td>{ch.dob}</td>
                   <td>{ch.age}</td>
                   <td>{ch.set_of_questions}</td>
-                  <td><img src={ch.image} alt="" /></td>
+                  <td>{ch.image}</td>
                   <td>{ch.createdAt}</td>
-                  <td>{<AiOutlineEdit onClick={handleShow} />}</td>
-                  <td>{<AiOutlineDelete />}</td>
+                  <td>
+                    {<AiOutlineEdit onClick={() => childEditHandler(ch.id)} />}
+                  </td>
+                  <td>
+                    {
+                      <AiOutlineDelete
+                        onClick={() => childDeleteHandler(ch.id)}
+                      />
+                    }
+                  </td>
                 </tr>
               ))}
             </tbody>
