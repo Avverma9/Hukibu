@@ -9,6 +9,7 @@ import Dashboard from './Dashboard'
 import Survey from './Components/Survey/Survey'
 import BarGraph from './Components/Charts/BarGraph/BarGraph'
 import FlexPieCharts from './Components/Charts/Pie/FlexPieChart'
+import User from './Components/User/User'
 
 
 
@@ -26,6 +27,8 @@ function App() {
      <Route path='/survey' element={<Survey/>}/>
      <Route path='/piechart' element={<FlexPieCharts/>}/>
      <Route path='/bargraph' element={<BarGraph/>}/>
+     <Route path='/user' element={<User/>}/>
+     
     </Routes>
   )
 }
