@@ -10,6 +10,7 @@ import Survey from './Components/Survey/Survey'
 import BarGraph from './Components/Charts/BarGraph/BarGraph'
 import FlexPieCharts from './Components/Charts/Pie/FlexPieChart'
 import User from './Components/User/User'
+import Header from './Components/Header/Header'
 
 
 
@@ -19,6 +20,8 @@ function App() {
 
 
   return (
+    <>
+    <Header/>
     <Routes>
       <Route path='/' element={<Dashboard/>}/>
      <Route path='/tasks' element={<Task/>}/>
@@ -31,7 +34,7 @@ function App() {
      <Route path='/bargraph' element={<BarGraph/>}/>
      <Route path='/user' element={<User/>}/>
      
-    </Routes>
+    </Routes></>
   )
 }
 
