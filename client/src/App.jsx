@@ -10,6 +10,7 @@ import Survey from "./Components/Survey/Survey";
 import BarGraph from "./Components/Charts/BarGraph/BarGraph";
 import FlexPieCharts from "./Components/Charts/Pie/FlexPieChart";
 import User from "./Components/User/User";
+import { Child } from "./Components/Child/Child";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path="/piechart" element={<FlexPieCharts />} />
       <Route path="/bargraph" element={<BarGraph />} />
       <Route path="/user" element={<User />} />
+      <Route path="/child" element={<Child />} />
     </Routes>
   );
 }
