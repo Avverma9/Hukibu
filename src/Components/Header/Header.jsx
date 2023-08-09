@@ -44,7 +44,7 @@ const Header = () => {
               Course
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">
+              <a className="dropdown-item" href="/get-courses">
                 Add a course
               </a>
               <a className="dropdown-item" href="#">
@@ -74,6 +74,11 @@ const Header = () => {
           <li className="nav-item">
             <a className="nav-link" href="/content">
               Content
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/activities">
+              Activities
             </a>
           </li>
         </ul>
