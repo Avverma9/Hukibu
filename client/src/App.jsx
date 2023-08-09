@@ -12,6 +12,8 @@ import FlexPieCharts from './Components/Charts/Pie/FlexPieChart'
 import User from './Components/User/User'
 import Header from './Components/Header/Header'
 import GetCourses from './Components/Courses/getCourses'
+import Activities from './Components/Activities/Activities'
+import SingleActivities from './Components/Activities/SingleActivities'
 
 
 
@@ -35,6 +37,8 @@ function App() {
      <Route path='/bargraph' element={<BarGraph/>}/>
      <Route path='/user' element={<User/>}/>
      <Route path='/get-courses' element={<GetCourses/>}/>
+     <Route path='/activities' element={<Activities/>}/>
+     <Route path='/activities/:id' element={<SingleActivities/>}/>
      
     </Routes></>
   )
