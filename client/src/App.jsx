@@ -25,7 +25,7 @@ function App() {
      <Route path="/calender" element={<Calendar/>}/>
      <Route path='/survey' element={<Survey/>}/>
      <Route path='/piechart' element={<FlexPieCharts/>}/>
-     <Route path='/bargraph' element={<BarGraph/>}/>
+      <Route path='/bargraph' element={<BarGraph />} />
     </Routes>
   )
 }
