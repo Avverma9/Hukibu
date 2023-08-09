@@ -11,6 +11,8 @@ const User = () => {
     const [editModalShow, setEditModalShow] = useState(false);
     const [editData, setEditData] = useState({});
     const [loading, setLoading] = useState(false);
+    const [deleteUserId, setDeleteUserId] = useState(null);
+    const [confirmDeleteModalShow, setConfirmDeleteModalShow] = useState(false);
 
     useEffect(() => {
         fetch('http://13.127.11.171:3000/admin-getUser')
@@ -75,9 +77,36 @@ const User = () => {
         }
     };
 
+    const handleDeleteClick = (userId) => {
+        setDeleteUserId(userId);
+        setConfirmDeleteModalShow(true);
+    };
+
+    const handleDeleteConfirm = async () => {
+        if (deleteUserId) {
+            try {
+                const response = await fetch(`http://13.127.11.171:3000/admin-deleteUserById/${deleteUserId}`, {
+                    method: 'GET'
+                });
+
+                if (response.ok) {
+                    setUserData(prevUserData => prevUserData.filter(user => user.id !== deleteUserId));
+                    toast.success('User deleted successfully');
+                } else {
+                    toast.error('Error deleting user');
+                }
+
+                setConfirmDeleteModalShow(false);
+                setDeleteUserId(null);
+            } catch (error) {
+                console.error('Error deleting user:', error);
+            }
+        }
+    };
+
     return (
         <div className="container mt-5">
-            <h2 className="mb-3">Courses Data</h2>
+            <h2 className="mb-3">User Data</h2>
             {userData.length > 0 ? (
                 <table className="table table-bordered">
                     <thead>
@@ -98,7 +127,7 @@ const User = () => {
                                 <td>{user.mobile}</td>
                                 <td>{user.email || 'N/A'}</td>
                                 <td><AiOutlineEdit onClick={() => handleEditModalOpen(user)} /></td>
-                                <td><AiOutlineDelete /></td>
+                                <td><AiOutlineDelete onClick={() => handleDeleteClick(user.id)} /></td>
                             </tr>
                         ))}
                     </tbody>
@@ -106,7 +135,7 @@ const User = () => {
             ) : (
                 <p>No data available</p>
             )}
-
+            {/* //Edit */}
             <Modal show={editModalShow} onHide={handleEditModalClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit User</Modal.Title>
@@ -185,6 +214,24 @@ const User = () => {
                     </Button>
                     <Button variant="primary" onClick={handleEditSubmit} disabled={loading}>
                         {loading ? <Spinner animation="border" size="sm" /> : 'Save Changes'}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* //Deltete */}
+            <Modal show={confirmDeleteModalShow} onHide={() => setConfirmDeleteModalShow(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Delete</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to delete this user?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setConfirmDeleteModalShow(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDeleteConfirm}>
+                        Delete
                     </Button>
                 </Modal.Footer>
             </Modal>
