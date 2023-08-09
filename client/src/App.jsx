@@ -14,14 +14,13 @@ import Header from './Components/Header/Header'
 import GetCourses from './Components/Courses/getCourses'
 import Activities from './Components/Activities/Activities'
 import SingleActivities from './Components/Activities/SingleActivities'
+import { Child } from "./Components/Child/Child";
 
 
 
 
 
 function App() {
-
-
   return (
     <>
     <Header/>
@@ -36,6 +35,7 @@ function App() {
      <Route path='/piechart' element={<FlexPieCharts/>}/>
      <Route path='/bargraph' element={<BarGraph/>}/>
      <Route path='/user' element={<User/>}/>
+     <Route path="/child" element={<Child />} />
      <Route path='/get-courses' element={<GetCourses/>}/>
      <Route path='/activities' element={<Activities/>}/>
      <Route path='/activities/:id' element={<SingleActivities/>}/>
@@ -44,4 +44,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
