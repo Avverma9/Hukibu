@@ -1,0 +1,55 @@
+.category{
+    padding: 20px;
+    }
+
+
+.category h2{
+    color: var(--secondary-color);
+    text-align: left;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-around;
+}
+
+.box{
+    border: 1px solid black;
+    padding: 5px 10px;
+    color: var(--gray-color)
+}
+
+.btn{
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    width: 90px;
+}
+
+/* ///////////////////////////////////////////////// */
+.survey {
+  margin-top: 40px;
+  text-align: left;
+  padding: 0 80px;
+}
+
+.cancelflex h2{
+    color: var(--secondary-color);
+}
+
+.survey p{
+    color: var(--gray-color)
+}
+
+.cancelflex{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
+}
+
+.seemore{
+    border: none;
+    color: white;
+    background-color: var(--secondary-color);
+    padding: 7px 13px;
+}
