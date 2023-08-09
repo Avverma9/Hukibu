@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -25,7 +25,7 @@ const Header = () => {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <a className="nav-link" href="/child">
               Manage Child
             </a>
           </li>
@@ -60,7 +60,6 @@ const Header = () => {
             </a>
           </li>
         </ul>
-      
       </div>
     </nav>
   );
