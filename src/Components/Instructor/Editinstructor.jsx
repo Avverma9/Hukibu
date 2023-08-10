@@ -10,17 +10,20 @@ export const Editinstructor = ({ show, handleClose, instId }) => {
   const [description, setDescription] = useState("");
   const [occupation, setOccupation] = useState("");
   const [image, setImage] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch(`http://13.127.11.171:3000/admin-getinstructorById/${instId}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setInstructor(data);
       })
-      .catch((error) => console.error("Error fetching data:", error));
+      .catch((error) => console.error("Error fetching data:", error))
+      .finally(setLoading(false));
   }, [instId]);
-
+  console.log(instructor);
   const updateInstructorHandler = async (e) => {
     e.preventDefault();
 
@@ -68,7 +71,11 @@ export const Editinstructor = ({ show, handleClose, instId }) => {
           </Form.Group>
           <Form.Control
             type="text"
-            value={instructor.course_id}
+            value={
+              !isLoading && instructor.length !== 0
+                ? instructor[0].course_id
+                : courseId
+            }
             onChange={(e) => setCourseId(e.target.value)}
           />
           <Form.Group>
@@ -76,14 +83,20 @@ export const Editinstructor = ({ show, handleClose, instId }) => {
           </Form.Group>
           <Form.Control
             type="text"
-            value={instructor.name}
+            value={
+              !isLoading && instructor.length !== 0 ? instructor[0].name : name
+            }
             onChange={(e) => setName(e.target.value)}
           />
           <Form.Group>
             <Form.Label>Description</Form.Label>
             <Form.Control
               type="text"
-              value={instructor.description}
+              value={
+                !isLoading && instructor.length !== 0
+                  ? instructor[0].description
+                  : description
+              }
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>
@@ -91,7 +104,11 @@ export const Editinstructor = ({ show, handleClose, instId }) => {
             <Form.Label>Occupation</Form.Label>
             <Form.Control
               type="text"
-              value={instructor.occupation}
+              value={
+                !isLoading && instructor.length !== 0
+                  ? instructor[0].occupation
+                  : occupation
+              }
               onChange={(e) => setOccupation(e.target.value)}
             />
           </Form.Group>
@@ -100,6 +117,11 @@ export const Editinstructor = ({ show, handleClose, instId }) => {
             <Form.Label>Image</Form.Label>
             <Form.Control
               type="text"
+              value={
+                !isLoading && instructor.length !== 0
+                  ? instructor[0].image
+                  : image
+              }
               onChange={(e) => setImage(e.target.value)}
             />
           </Form.Group>

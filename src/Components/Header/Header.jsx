@@ -86,6 +86,11 @@ const Header = () => {
               Instructor
             </a>
           </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/all-steps">
+              Steps
+            </a>
+          </li>
         </ul>
       </div>
     </nav>

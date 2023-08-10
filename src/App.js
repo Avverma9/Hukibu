@@ -17,6 +17,7 @@ import GetCourses from "./Components/Courses/getCourses";
 import Activities from "./Components/Activities/Activities";
 import SingleActivities from "./Components/Activities/SingleActivities";
 import { Instructor } from "./Components/Instructor/Instructor";
+import { Steps } from "./Components/Steps/Steps";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/activities" element={<Activities />} />
           <Route path="/activities/:id" element={<SingleActivities />} />
           <Route path="/all-instructor" element={<Instructor />} />
+          <Route path="/all-steps" element={<Steps />} />
         </Routes>
       </Router>
     </>
