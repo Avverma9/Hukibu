@@ -4,7 +4,7 @@ import { BiShow } from 'react-icons/bi';
 import { toast } from 'react-toastify';
 import { Modal, Button,Spinner,Form } from 'react-bootstrap';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
-
+import './course.css'
 const GetCourses = () => {
     const [courseData, setCourseData] = useState([]);
     const [selectedCourseId, setSelectedCourseId] = useState(null);
@@ -213,7 +213,7 @@ const GetCourses = () => {
                                 <td>{course.courseName}</td>
                                 <td>{course.courseDesc}</td>
                                 <td>{course.price}</td>
-                                <td><img src={course.images} alt={`Course ${course.id} Thumbnail`} /></td>
+                                <td><img className="activity_image" src={`http://13.127.11.171:3000/uploads/${course.images}`} alt="" /></td>
                                 <td>{course.whatYouGet}</td>
                                 <td><BiShow onClick={() => openModal(course.id)} /></td>
                                 <td>{<AiOutlineEdit onClick={() => handleEditModalOpen(course)} />}</td>
@@ -300,7 +300,7 @@ const GetCourses = () => {
                             <p>Course Name: {courseDetails.courseName}</p>
                             <p>Course Description: {courseDetails.courseDesc}</p>
                             <p>Price: {courseDetails.price}</p>
-                            <p>Images: <img src={courseDetails.images} alt={`Course ${courseDetails.id} Thumbnail`} /></p>
+                            <p>Images: <img className="course_image" src={`http://13.127.11.171:3000/uploads/${courseDetails.images}`} alt="" /></p>
                             <p>What You Get: {courseDetails.whatYouGet}</p>
                         </div>
                     )}

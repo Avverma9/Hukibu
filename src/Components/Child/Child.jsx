@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import { useEffect, useState } from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { Updatechild } from "./Updatechild";
@@ -52,6 +53,7 @@ export const Child = () => {
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+
   return (
     <>
       <Updatechild show={show} handleClose={handleClose} childId={childId} />
@@ -88,10 +90,10 @@ export const Child = () => {
                   <td>{ch.dob}</td>
                   <td>{ch.age}</td>
                   <td>{ch.set_of_questions}</td>
-                  <td>{ch.image}</td>
+                  <td><img src={`http://13.127.11.171:3000/uploads/${ch.image}`} alt="" /></td>
                   <td>{ch.createdAt}</td>
                   <td>
-                    {<AiOutlineEdit onClick={() => childEditHandler(ch.id)} />}
+                    {<AiOutlineEdit onClick={() => childEditHandler(ch.id)} />} 
                   </td>
                   <td>
                     {

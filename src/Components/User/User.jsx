@@ -91,10 +91,12 @@ const User = () => {
             const responseData = await response.json();
 
             if (response.ok && responseData.success) {
+                window.location.reload("/user")
+
                 setUserData(prevUserData => {
                     return prevUserData.map(user => user.id === id ? responseData.updatedUser : user);
                 });
-
+                
                 toast.success('User data updated successfully');
             } else {
                 toast.error('Error updating user data');
@@ -102,6 +104,7 @@ const User = () => {
 
             setLoading(false);
             handleEditModalClose();
+            window.location.reload("/user")
         } catch (error) {
             console.error('Error updating data:', error);
             setLoading(false);

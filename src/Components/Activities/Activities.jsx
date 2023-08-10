@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { BiShow } from 'react-icons/bi';
 import {AiOutlineDelete} from 'react-icons/ai'
 import { Modal, Button, Form } from 'react-bootstrap';
+import './Activities.css'
 const Activities = () => {
   const [activitiesData, setActivitiesData] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -130,12 +131,7 @@ const Activities = () => {
                  <tr key={activities.id}>
                    <td>{activities.id}</td>
                    <td>{activities.name}</td>
-                   <td>
-                     <img
-                       src={activities.images}
-                       alt={`Activity ${activities.id} Thumbnail`}
-                     />
-                   </td>
+                   <td><img className="activity_image" src={`http://13.127.11.171:3000/uploads/${activities.image}`} alt="" /></td>
                    <td>{activities.time_duration}</td>
                    <td>
                      <Link to={`/activities/${activities.id}`}>
