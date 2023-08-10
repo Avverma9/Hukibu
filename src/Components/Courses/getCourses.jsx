@@ -105,6 +105,7 @@ const GetCourses = () => {
             if (response.ok && responseData.success) {
                 toast.success('Course added successfully');
                 setCourseData(prevCourseData => [...prevCourseData, responseData.newCourse]);
+                window.location.reload("/get-courses")
             } else {
                 toast.error('Error adding course');
             }
@@ -150,6 +151,7 @@ const GetCourses = () => {
     
             setLoading(false);
             handleEditModalClose();
+            window.location.reload("/get-courses")
         } catch (error) {
             console.error('Error updating data:', error);
             setLoading(false);
@@ -176,6 +178,7 @@ const GetCourses = () => {
 
             setLoading(false);
             handleDeleteModalClose();
+            window.location.reload("/activities")
         } catch (error) {
             console.error('Error deleting user:', error);
             setLoading(false);
@@ -332,7 +335,7 @@ const GetCourses = () => {
             {/* edit  */}
             <Modal show={editModalShow} onHide={handleEditModalClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit User</Modal.Title>
+                    <Modal.Title>Edit Course</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>

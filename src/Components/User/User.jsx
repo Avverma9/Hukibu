@@ -102,6 +102,7 @@ const User = () => {
 
             setLoading(false);
             handleEditModalClose();
+            window.location.reload("/user")
         } catch (error) {
             console.error('Error updating data:', error);
             setLoading(false);
@@ -127,6 +128,7 @@ const User = () => {
 
             setLoading(false);
             handleDeleteModalClose();
+            window.location.reload("/user")
         } catch (error) {
             console.error('Error deleting user:', error);
             setLoading(false);

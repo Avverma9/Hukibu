@@ -68,6 +68,7 @@ const Activities = () => {
         const newData = await response.json();
         setActivitiesData(prevData => [...prevData, newData]);
         handleCloseModal();
+        
       }
     } catch (error) {
       console.error('Error adding activity:', error);
