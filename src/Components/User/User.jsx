@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import { Modal, Button, Form, Spinner } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import { BiShow } from 'react-icons/bi';
+
 
 
 const User = () => {
@@ -11,6 +13,10 @@ const User = () => {
     const [editModalShow, setEditModalShow] = useState(false);
     const [editData, setEditData] = useState({});
     const [loading, setLoading] = useState(false);
+    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    const [deleteUserId, setDeleteUserId] = useState(null);
+    const [detailedUser, setDetailedUser] = useState(null);
+    const [detailModalShow, setDetailModalShow]=useState(false)
 
     useEffect(() => {
         fetch('http://13.127.11.171:3000/admin-getUser')
@@ -32,6 +38,33 @@ const User = () => {
         setEditModalShow(false);
         setEditData({});
     };
+
+    const handleDeleteModalOpen = (userId) => {
+        setDeleteUserId(userId);
+        setDeleteModalShow(true);
+    };
+
+    const handleDeleteModalClose = () => {
+        setDeleteUserId(null);
+        setDeleteModalShow(false);
+    };
+
+    const handleViewModalOpen = async (userId) => {
+        try {
+            const response = await fetch(`http://13.127.11.171:3000/getUserById/${userId}`);
+            const userData = await response.json();
+
+            if (response.ok && userData.success) {
+                setDetailedUser(userData.data);
+                setDetailModalShow(true); 
+            } else {
+                toast.error('Error fetching user data');
+            }
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
+    };
+    
 
     const handleEditSubmit = async () => {
         const id = localStorage.getItem("userId");
@@ -60,8 +93,8 @@ const User = () => {
             if (response.ok && responseData.success) {
                 setUserData(prevUserData => {
                     return prevUserData.map(user => user.id === id ? responseData.updatedUser : user);
-                  });
-            
+                });
+
                 toast.success('User data updated successfully');
             } else {
                 toast.error('Error updating user data');
@@ -75,6 +108,32 @@ const User = () => {
         }
     };
 
+    const handleDeleteUser = async () => {
+        setLoading(true);
+
+        try {
+            const response = await fetch(`http://13.127.11.171:3000/admin-deleteUserById/${deleteUserId}`, {
+                method: 'GET'
+            });
+
+            const responseData = await response.json();
+
+            if (response.ok && responseData.success) {
+                setUserData(prevUserData => prevUserData.filter(user => user.id !== deleteUserId));
+                toast.success('User deleted successfully');
+            } else {
+                toast.error('Error deleting user');
+            }
+
+            setLoading(false);
+            handleDeleteModalClose();
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            setLoading(false);
+        }
+    };
+
+
     return (
         <div className="container mt-5">
             <h2 className="mb-3">User Data</h2>
@@ -86,6 +145,7 @@ const User = () => {
                             <th>Name</th>
                             <th>Mobile</th>
                             <th>Email</th>
+                            <th>View</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -97,8 +157,11 @@ const User = () => {
                                 <td>{user.name || 'N/A'}</td>
                                 <td>{user.mobile}</td>
                                 <td>{user.email || 'N/A'}</td>
+                                <td>
+                                    <BiShow onClick={() => handleViewModalOpen(user.id)} />
+                                </td>
                                 <td><AiOutlineEdit onClick={() => handleEditModalOpen(user)} /></td>
-                                <td><AiOutlineDelete /></td>
+                                <td><AiOutlineDelete onClick={() => handleDeleteModalOpen(user.id)} /></td>
                             </tr>
                         ))}
                     </tbody>
@@ -107,6 +170,9 @@ const User = () => {
                 <p>No data available</p>
             )}
 
+
+
+            {/* edit  */}
             <Modal show={editModalShow} onHide={handleEditModalClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit User</Modal.Title>
@@ -185,6 +251,45 @@ const User = () => {
                     </Button>
                     <Button variant="primary" onClick={handleEditSubmit} disabled={loading}>
                         {loading ? <Spinner animation="border" size="sm" /> : 'Save Changes'}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* //delete */}
+            <Modal show={deleteModalShow} onHide={handleDeleteModalClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Delete User</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Are you sure you want to delete this user?</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleDeleteModalClose}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDeleteUser} disabled={loading}>
+                        {loading ? <Spinner animation="border" size="sm" /> : 'Delete'}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* view  */}
+            <Modal show={detailModalShow} onHide={() => setDetailModalShow(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>View User Details</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {detailedUser && (
+                        <div>
+                            <p>ID: {detailedUser.id}</p>
+                            <p>Name: {detailedUser.name}</p>
+                           
+                        </div>
+                    )}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setDetailModalShow(false)}>
+                        Close
                     </Button>
                 </Modal.Footer>
             </Modal>

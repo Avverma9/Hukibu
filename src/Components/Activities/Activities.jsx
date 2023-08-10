@@ -65,7 +65,6 @@ const Activities = () => {
       });
 
       if (response.ok) {
-        // Refresh activities data after adding new activity
         const newData = await response.json();
         setActivitiesData(prevData => [...prevData, newData]);
         handleCloseModal();
