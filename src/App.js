@@ -16,6 +16,8 @@ import Welcome from "./Components/Welcome/Welcome";
 import GetCourses from "./Components/Courses/getCourses";
 import Activities from "./Components/Activities/Activities";
 import SingleActivities from "./Components/Activities/SingleActivities";
+import { Instructor } from "./Components/Instructor/Instructor";
+import { Steps } from "./Components/Steps/Steps";
 import Materials from "./Components/Materials/Materials";
 
 function App() {
@@ -35,10 +37,12 @@ function App() {
           <Route path="/bargraph" element={<BarGraph />} />
           <Route path="/user" element={<User />} />
           <Route path="/child" element={<Child />} />
+          <Route path="/materials" element={<Materials />} />
           <Route path="/get-courses" element={<GetCourses />} />
           <Route path="/activities" element={<Activities />} />
           <Route path="/activities/:id" element={<SingleActivities />} />
-          <Route path="/materials" element={<Materials />} />
+          <Route path="/all-instructor" element={<Instructor />} />
+          <Route path="/all-steps" element={<Steps />} />
         </Routes>
       </Router>
     </>
