@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import Task from "./Components/Task/Task";
@@ -13,17 +13,19 @@ import User from "./Components/User/User";
 import Header from "./Components/Header/Header";
 import { Child } from "./Components/Child/Child";
 import Welcome from "./Components/Welcome/Welcome";
-import GetCourses from './Components/Courses/getCourses'
-import Activities from './Components/Activities/Activities'
-import SingleActivities from './Components/Activities/SingleActivities'
-import Materials from "./Components/Materials/Materials";
+import GetCourses from "./Components/Courses/getCourses";
+import Activities from "./Components/Activities/Activities";
+import SingleActivities from "./Components/Activities/SingleActivities";
+import { Instructor } from "./Components/Instructor/Instructor";
+import { Steps } from "./Components/Steps/Steps";
 
 function App() {
   return (
     <>
       <Header />
 
-      <Router><Welcome />
+      <Router>
+        <Welcome />
         <Routes>
          
           {/* <Route path="/enguaries" element={<Enguaries />} /> */}
@@ -35,11 +37,11 @@ function App() {
           <Route path="/bargraph" element={<BarGraph />} />
           <Route path="/user" element={<User />} />
           <Route path="/child" element={<Child />} />
-          <Route path='/get-courses' element={<GetCourses />} />
-          <Route path='/activities' element={<Activities />} />
-          <Route path='/activities/:id' element={<SingleActivities />} />
-          <Route path="/materials" element={<Materials/>}/>
-
+          <Route path="/get-courses" element={<GetCourses />} />
+          <Route path="/activities" element={<Activities />} />
+          <Route path="/activities/:id" element={<SingleActivities />} />
+          <Route path="/all-instructor" element={<Instructor />} />
+          <Route path="/all-steps" element={<Steps />} />
         </Routes>
       </Router>
     </>
