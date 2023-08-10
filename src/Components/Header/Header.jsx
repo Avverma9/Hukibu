@@ -56,39 +56,34 @@ const Header = () => {
               </a>
             </div>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a className="nav-link" href="/tasks">
               Tasks
             </a>
-          </li>
-          <li className="nav-item">
+          </li> */}
+          {/* <li className="nav-item">
             <a className="nav-link" href="/survey">
               Survey
             </a>
-          </li>
-          <li className="nav-item">
+          </li> */}
+          {/* <li className="nav-item">
             <a className="nav-link" href="/enguaries">
               Enquaries
             </a>
-          </li>
-          <li className="nav-item">
+          </li> */}
+          {/* <li className="nav-item">
             <a className="nav-link" href="/content">
               Content
             </a>
-          </li>
+          </li> */}
           <li className="nav-item">
             <a className="nav-link" href="/activities">
               Activities
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/all-instructor">
-              Instructor
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/all-steps">
-              Steps
+            <a className="nav-link" href="/materials">
+              Materials
             </a>
           </li>
         </ul>
