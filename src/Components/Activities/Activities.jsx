@@ -17,10 +17,14 @@ const Activities = () => {
       .then(response => response.json())
       .then(data => {
         setActivitiesData(data);
+  
+        // Extract and store ids in localStorage
+        const ids = data.map(activity => activity.id);
+        localStorage.setItem('activity_id', JSON.stringify(ids));
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
-
+  
   const handleAddActivity = () => {
     setShowModal(true);
   };
@@ -84,8 +88,8 @@ const Activities = () => {
              <thead>
                <tr>
                  <th>ID</th>
-                 <th>Images</th>
                  <th>Name</th>
+                 <th>Images</th>
                  <th>Time Duration</th>
                </tr>
              </thead>
