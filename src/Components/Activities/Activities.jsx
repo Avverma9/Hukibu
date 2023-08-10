@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { BiShow } from 'react-icons/bi';
 import {AiOutlineDelete} from 'react-icons/ai'
 import { Modal, Button, Form } from 'react-bootstrap';
-
 const Activities = () => {
   const [activitiesData, setActivitiesData] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -110,6 +109,8 @@ const Activities = () => {
 
   return (
     <div className="container mt-5">
+      <div><p className="welcome-text-user">Welcome to Activites !</p></div>
+      <div><p className="welcome-text-user2">Here You can manage users Activity ...</p></div>
       <h2 className="mb-3">Activities</h2>
       <button onClick={handleAddActivity}>Add Activity</button>
       {activitiesData.length > 0 ? (
@@ -215,4 +216,4 @@ const Activities = () => {
   );
 };
 
-export default Activities;
+export default Activities;

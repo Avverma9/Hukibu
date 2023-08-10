@@ -10,7 +10,7 @@ const Welcome = () => {
   return (
     <div className="welcome-image">
       <img src="https://media.tenor.com/T4664VfiM0cAAAAC/asistente-robot.gif" alt="" />
-      <p className="welcome-text">Welcome Admin !</p>
+      <p className="welcome-text-admin">Welcome Admin !</p>
       <button className="lets-go-button">
         <a href="/user">Let's GO</a>
         </button>

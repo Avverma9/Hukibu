@@ -189,6 +189,8 @@ const GetCourses = () => {
 
     return (
         <div className="container mt-5">
+                  <div><p className="welcome-text-user">Welcome to Courses!</p></div>
+      <div><p className="welcome-text-user2">Here You can manage your courses</p></div>
             <h2 className="mb-3">Course Data</h2>
             <button onClick={openAddModal}>Add Course</button>
 

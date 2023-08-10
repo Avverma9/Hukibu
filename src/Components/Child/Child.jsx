@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { Updatechild } from "./Updatechild";
-
+import './Child.css'
 export const Child = () => {
   const [childData, setChildData] = useState([]);
   const [childId, setChildId] = useState(null);
   const [show, setShow] = useState(false);
+
+  const parentId = localStorage.getItem("userId");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -16,7 +18,7 @@ export const Child = () => {
   };
 
   const fetchChilddata = () => {
-    fetch("http://13.127.11.171:3000/admin-getChildByUserId/1")
+    fetch(`http://13.127.11.171:3000/admin-getChildByUserId/${parentId}`)
       .then((response) => response.json())
       .then((data) => {
         setChildData(data);
@@ -54,7 +56,9 @@ export const Child = () => {
     <>
       <Updatechild show={show} handleClose={handleClose} childId={childId} />
       <div className="container mt-5">
-        <h2 className="mb-3">User Data</h2>
+        <h2>Child Management</h2>
+      <div><p className="welcome-text-child">Welcome to Child Management !</p></div>
+      <div><p className="welcome-text-child2">Here You can manage users child </p></div>
         {childData.length > 0 ? (
           <table className="table table-bordered">
             <thead>

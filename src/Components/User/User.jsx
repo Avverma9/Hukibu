@@ -5,7 +5,7 @@ import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import { Modal, Button, Form, Spinner } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { BiShow } from 'react-icons/bi';
-
+import './User.css'
 
 
 const User = () => {
@@ -138,7 +138,9 @@ const User = () => {
 
     return (
         <div className="container mt-5">
-            <h2 className="mb-3">User Data</h2>
+                  <div><p className="welcome-text-user">Welcome to Users Management</p></div>
+      <div><p className="welcome-text-user2">Here You can manage users</p></div>
+            <h2 className="mb-3">User Management</h2>
             {userData.length > 0 ? (
                 <table className="table table-bordered">
                     <thead>
@@ -147,7 +149,7 @@ const User = () => {
                             <th>Name</th>
                             <th>Mobile</th>
                             <th>Email</th>
-                            <th>View</th>
+                          
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -159,9 +161,7 @@ const User = () => {
                                 <td>{user.name || 'N/A'}</td>
                                 <td>{user.mobile}</td>
                                 <td>{user.email || 'N/A'}</td>
-                                <td>
-                                    <BiShow onClick={() => handleViewModalOpen(user.id)} />
-                                </td>
+                               
                                 <td><AiOutlineEdit onClick={() => handleEditModalOpen(user)} /></td>
                                 <td><AiOutlineDelete onClick={() => handleDeleteModalOpen(user.id)} /></td>
                             </tr>
