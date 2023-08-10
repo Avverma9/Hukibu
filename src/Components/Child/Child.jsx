@@ -7,6 +7,8 @@ export const Child = () => {
   const [childId, setChildId] = useState(null);
   const [show, setShow] = useState(false);
 
+  const parentId = localStorage.getItem("userId");
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -16,7 +18,7 @@ export const Child = () => {
   };
 
   const fetchChilddata = () => {
-    fetch("http://13.127.11.171:3000/admin-getChildByUserId/1")
+    fetch(`http://13.127.11.171:3000/admin-getChildByUserId/${parentId}`)
       .then((response) => response.json())
       .then((data) => {
         setChildData(data);
