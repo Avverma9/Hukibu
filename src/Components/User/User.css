@@ -1,0 +1,77 @@
+.welcome-text-user {
+    color: #db681c;
+   position: absolute;
+   top: 10%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 24px;
+   font-weight: bold;
+   opacity: 0;
+   animation: fadeAndSlide 2s forwards;
+ }
+ 
+ @keyframes fadeAndSlide {
+   0% {
+     transform: translate(-70%, -90%) translateY(-20px);
+     opacity: 0;
+   }
+   100% {
+     transform: translate(-50%, -50%);
+     opacity: 1;
+   }
+ }
+ .welcome-text-user2 {
+   position: absolute;
+   top: 14%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 24px;
+   font-weight: bold;
+   opacity: 0;
+   animation: fadeAndSlide 5s forwards;
+ }
+ 
+ @keyframes fadeAndSlide {
+   0% {
+     transform: translate(-70%, -90%) translateY(-20px);
+     opacity: 0;
+   }
+   100% {
+     transform: translate(-50%, -50%);
+     opacity: 1;
+   }
+ }
+
+ /* Child.css */
+
+.container mt-5{
+   margin-top: 200px;
+ }
+ 
+
+ .table {
+   width: 100%;
+   border-collapse: collapse;
+   margin-top: 20px;
+ }
+ 
+ .table th,
+ .table td {
+   border: 1px solid #c08787;
+   padding: 8px;
+   text-align: center;
+ }
+ 
+ .table th {
+   background-color: #bfdb1c;
+ }
+ 
+ .table th:last-child,
+ .table td:last-child {
+   text-align: center;
+ }
+ 
+
+ 
+ /* You can add more specific styling or adjust colors as needed */
+ 

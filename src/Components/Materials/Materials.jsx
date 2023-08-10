@@ -105,6 +105,8 @@ const Materials = () => {
  
   return (
     <div className="container mt-5">
+            <div><p className="welcome-text-user">Welcome to Materials</p></div>
+      <div><p className="welcome-text-user2">Here You can manage your materials</p></div>
       <h2 className="mb-3">Materials</h2>
       <button onClick={handleAddMaterials}>Add Materials</button>
       {materialsData.length > 0 ? (

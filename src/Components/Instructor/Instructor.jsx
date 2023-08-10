@@ -63,7 +63,9 @@ export const Instructor = () => {
     <>
       <Editinstructor show={show} handleClose={handleClose} instId={instId} />
       <div className="container mt-5">
-        <h2 className="mb-3">User Data</h2>
+      <div><p className="welcome-text-user">Welcome to Instructor Page !</p></div>
+      <div><p className="welcome-text-user2">Here You can manage Instructor data</p></div>
+        <h2 className="mb-3">Instructors</h2>
         {instructorData.length > 0 ? (
           <table className="table table-bordered">
             <thead>

@@ -58,6 +58,8 @@ export const Steps = () => {
         <Updatestep show={show} handleClose={handleClose} stepId={stepId} />
 
         <div className="container mt-5">
+        <div><p className="welcome-text-user">Welcome to Steps !</p></div>
+      <div><p className="welcome-text-user2">Here You can manage steps ...</p></div>
           <h2 className="mb-3">Steps Data</h2>
           {stepData.length > 0 ? (
             <table className="table table-bordered">
