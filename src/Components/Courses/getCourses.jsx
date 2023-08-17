@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import './getCourses.css';
 import { useState, useEffect } from 'react';
 import { BiShow } from 'react-icons/bi';
 import { Modal, Button } from 'react-bootstrap';

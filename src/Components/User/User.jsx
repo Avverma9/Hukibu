@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import { Modal, Button, Form, Spinner } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import './User.css';
 
 
 const User = () => {
@@ -97,8 +98,8 @@ const User = () => {
                                 <td>{user.name || 'N/A'}</td>
                                 <td>{user.mobile}</td>
                                 <td>{user.email || 'N/A'}</td>
-                                <td><AiOutlineEdit onClick={() => handleEditModalOpen(user)} /></td>
-                                <td><AiOutlineDelete /></td>
+                                <td className='pencil-icon'><AiOutlineEdit onClick={() => handleEditModalOpen(user)} /></td>
+                                <td><AiOutlineDelete className='delete-icon'/></td>
                             </tr>
                         ))}
                     </tbody>

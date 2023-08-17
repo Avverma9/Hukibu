@@ -1,0 +1,11 @@
+.add-activity{
+    border: none;
+    background: rgb(65, 65, 255);
+    color: white;
+    font-weight: 501;
+    margin-bottom: 5px;
+    width: 100px;
+    height: 40px;
+    padding: 8px;
+    border-radius: 3px;
+}

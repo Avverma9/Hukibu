@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BiShow } from 'react-icons/bi';
 import { Modal, Button, Form } from 'react-bootstrap';
+import './Activity.css';
 
 const Activities = () => {
   const [activitiesData, setActivitiesData] = useState([]);
@@ -78,7 +79,7 @@ const Activities = () => {
   return (
     <div className="container mt-5">
       <h2 className="mb-3">Activities</h2>
-      <button onClick={handleAddActivity}>Add Activity</button>
+      <button className='add-activity' onClick={handleAddActivity}>Add Activity</button>
       {activitiesData.length > 0 ? (
              <table className="table table-bordered">
              <thead>
@@ -87,6 +88,7 @@ const Activities = () => {
                  <th>Images</th>
                  <th>Name</th>
                  <th>Time Duration</th>
+                 <th>View</th>
                </tr>
              </thead>
              <tbody>

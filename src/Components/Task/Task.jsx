@@ -94,14 +94,14 @@ const Task = () => {
       {isLoading ? ( 
         <Spinner animation="border" variant="primary" />
         ) : (
-      tasks.slice(0, showAllTasks ? tasks.length : 5).map((task, index) => (
+      tasks.slice(0, showAllTasks ? tasks.length : 60).map((task, index) => (
         <div className={style.container} key={index}>
           <div className={style.content}>
             <p>
               <span className={style.numbers}>{index + 1}.</span> {task.task}
             </p>
           </div>
-          <div>
+          <div className={style.delete}>
             <span>
               <FiDelete onClick={() => handleDeleteTask(task._id)} />
             </span>

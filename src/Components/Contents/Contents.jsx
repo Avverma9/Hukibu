@@ -299,16 +299,21 @@ const Contents = () => {
         />
       </div>
     </form>
+    
   </Modal.Body>
+  <div className='button'>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseTaskModal}>
+          <Button  variant="secondary" onClick={handleCloseTaskModal}>
             Cancel
           </Button>
           <Button variant="primary" onClick={handleAddTaskSubmit}>
             Add Task
           </Button>
         </Modal.Footer>
+        </div>
+        
       </Modal>
+      
 
       <Modal show={isDeleteModalOpen} onHide={handleRemoveTagsCancel}>
         <Modal.Header closeButton>
@@ -324,8 +329,11 @@ const Contents = () => {
           <Button variant="danger" onClick={handleRemoveTagsConfirmation}>
             Yes
           </Button>
+          
         </Modal.Footer>
+        
       </Modal>
+      
     </div>
   );
 };
