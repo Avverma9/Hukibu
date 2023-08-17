@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
+import {TbArrowBackUp} from 'react-icons/tb';
 import {BiShow} from 'react-icons/bi';
+import {VscAdd} from 'react-icons/vsc';
 import './Materials.css'
 const Materials = () => {
   const navigate=useNavigate()
@@ -50,7 +52,8 @@ const Back=()=>{
 
   return (
     <div>
-      <button onClick={() => setShowAddForm(true)}>Add Material</button>
+      <div><button className="backarrow-btn" onClick={Back}><TbArrowBackUp/></button></div>
+      <button className="add-btn" onClick={() => setShowAddForm(true)}><VscAdd/></button>
       {showAddForm && (
         <form onSubmit={handleSubmit}>
           <input type="text" name="Activity Id" value={activity_id} placeholder="Activity Id" onChange={(e) => setActivity_id(e.target.value)} />
@@ -83,7 +86,7 @@ const Back=()=>{
               </td>
             </tr>
           ))}
-          <div><button onClick={Back}>Go Back</button></div>
+        
         </tbody>
       </table>
     </div>

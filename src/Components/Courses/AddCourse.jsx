@@ -1,5 +1,7 @@
 import React,{useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import {TbArrowBackUp} from 'react-icons/tb';
+import {VscAdd} from 'react-icons/vsc';
 import "./course.css"
 const AddCourse=()=>{
     const navigate = useNavigate()
@@ -41,26 +43,36 @@ if(location.pathname !== "/add-courses"){
 }
     return (
         <>
-        <button onClick={handleBack}>Go Back</button>
-        <form onSubmit={handleSubmit}>
+           <button className="backarrow-btn" onClick={handleBack}><TbArrowBackUp/></button>
+        <form className="addcoarse-form" onSubmit={handleSubmit}>
+        
+     
+        
+        
+        <div className="form-field">
         <label>Course Name:</label>
         <input type="text" value={courseName} onChange={(e) => setCourseName(e.target.value)} />
-
+        </div>
+        <div className="form-field">
         <label>Course Description:</label>
         <input type="text" value={courseDesc} onChange={(e) => setCourseDesc(e.target.value)} />
-
+        </div>
+        <div className="form-field">
         <label>Price:</label>
         <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
-
+        </div>
+        <div className="form-field">
         <label>What You Get:</label>
         <input type="text" value={whatYouGet[0]} onChange={(e) => setWhatYouGet([e.target.value, whatYouGet[1], whatYouGet[2]])} />
         <input type="text" value={whatYouGet[1]} onChange={(e) => setWhatYouGet([whatYouGet[0], e.target.value, whatYouGet[2]])} />
         <input type="text" value={whatYouGet[2]} onChange={(e) => setWhatYouGet([whatYouGet[0], whatYouGet[1], e.target.value])} />
-
-        <label>Image:</label>
+</div>
+<div className="form-field-a">
+        <label>Image:
         <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-
-        <button type="submit">Add Course</button>
+        </label>
+        </div>
+        <button className="add-btn" type="submit"><VscAdd/></button>
     </form>
     </>
     )
