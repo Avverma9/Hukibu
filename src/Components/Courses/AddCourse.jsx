@@ -41,7 +41,7 @@ if(location.pathname !== "/add-courses"){
 }
     return (
         <>
-        <button onClick={handleBack}>back</button>
+        <button onClick={handleBack}>Go Back</button>
         <form onSubmit={handleSubmit}>
         <label>Course Name:</label>
         <input type="text" value={courseName} onChange={(e) => setCourseName(e.target.value)} />

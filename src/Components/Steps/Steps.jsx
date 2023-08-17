@@ -38,7 +38,7 @@ export const Steps = () => {
     const stepDeleteHandler = async (stid) => {
          try {
            const response = await fetch(
-             `http://13.235.242.110:3000/admin-deletestepsById/${stid}`,
+             `image.png/admin-deletestepsById/${stid}`,
              {
                method: "GET",
              }
@@ -61,6 +61,12 @@ export const Steps = () => {
         <div><p className="welcome-text-user">Welcome to Steps !</p></div>
       <div><p className="welcome-text-user2">Here You can manage steps ...</p></div>
           <h2 className="mb-3">Steps Data</h2>
+          <button style={{ backgroundColor: "black", textDecoration: "none" }}>
+  <a href="/add-steps" style={{ textDecoration: "none", color: "white" }}>
+    Add Steps
+  </a>
+</button>
+
           {stepData.length > 0 ? (
             <table className="table table-bordered">
               <thead>

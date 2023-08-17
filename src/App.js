@@ -21,6 +21,8 @@ import { Steps } from "./Components/Steps/Steps";
 import Materials from "./Components/Materials/Materials";
 import Courses from "./Components/Courses/Courses";
 import AddCourse from "./Components/Courses/AddCourse";
+import AddStep from "./Components/Steps/AddSteps";
+import AddInstructor from "./Components/Instructor/AddInstructor";
 
 function App() {
   return (
@@ -42,10 +44,11 @@ function App() {
           <Route path="/user" element={<User />} />
           <Route path="/child" element={<Child />} />
           <Route path="/materials" element={<Materials/>} />
-          
+          <Route path="/add-steps" element={<AddStep/>}/>
           <Route path="/activities" element={<Activities />} />
           <Route path="/activities/:id" element={<SingleActivities />} />
           <Route path="/all-instructor" element={<Instructor />} />
+          <Route path="/add-instructor" element={<AddInstructor/>}/>
           <Route path="/all-steps" element={<Steps />} />
          <Route path="/get-courses" element={<Courses/>}/>
         

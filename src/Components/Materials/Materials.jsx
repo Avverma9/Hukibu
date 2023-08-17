@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import {BiShow} from 'react-icons/bi';
 import './Materials.css'
 const Materials = () => {
+  const navigate=useNavigate()
   const [data, setData] = useState([]);
   const [activity_id, setActivity_id] = useState("");
   const [material_name, setMaterial_name] = useState("");
   const [showAddForm, setShowAddForm] = useState(false);
 
+
+const Back=()=>{
+ window.location.reload()
+}
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await axios.post("http://13.235.242.110:3000/admin-addmaterials", {
@@ -62,6 +68,8 @@ const Materials = () => {
           </tr>
         </thead>
         <tbody>
+        
+          
           {data.map((e) => (
             <tr key={e.id}>
               <td>{e.id}</td>
@@ -69,11 +77,13 @@ const Materials = () => {
               <td>{e.material_name}</td>
               <td>
                 <button className="show-btn" onClick={() => getById(e.id)}><BiShow/></button>
+                
                 <button className="dlit-btn" onClick={() => handleDelete(e.id)}><AiOutlineDelete/></button>
+                
               </td>
             </tr>
           ))}
-          
+          <div><button onClick={Back}>Go Back</button></div>
         </tbody>
       </table>
     </div>

@@ -65,6 +65,11 @@ export const Instructor = () => {
       <div className="container mt-5">
       <div><p className="welcome-text-user">Welcome to Instructor Page !</p></div>
       <div><p className="welcome-text-user2">Here You can manage Instructor data</p></div>
+      <button style={{ backgroundColor: "black", textDecoration: "none" }}>
+  <a href="/add-instructor" style={{ textDecoration: "none", color: "white" }}>
+    Add Instructor
+  </a>
+</button>
         <h2 className="mb-3">Instructors</h2>
         {instructorData.length > 0 ? (
           <table className="table table-bordered">
@@ -87,7 +92,7 @@ export const Instructor = () => {
                   <td>{ch.name}</td>
                   <td>{ch.description}</td>
                   <td>
-                    <img src={ch.image} alt={ch.image} />
+                    <img src={`http://13.235.242.110:3000/uploads/${ch.image}`} alt={ch.image} />
                   </td>
                   <td>{ch.occupation}</td>
                   <td>
