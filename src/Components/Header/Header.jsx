@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
 import React from "react";
-
+import './Header.css'
 const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -45,40 +46,58 @@ const Header = () => {
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <a className="dropdown-item" href="/get-courses">
-                Add a course
+                Manage Course
               </a>
-              <a className="dropdown-item" href="#">
+              <a className="dropdown-item" href="/add-courses">
+                Add a Course
+              </a>
+              {/* <a className="dropdown-item" href="#">
                 Update Price
               </a>
               <div className="dropdown-divider"></div>
               <a className="dropdown-item" href="#">
                 Something else here
-              </a>
+              </a> */}
             </div>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a className="nav-link" href="/tasks">
               Tasks
             </a>
-          </li>
-          <li className="nav-item">
+          </li> */}
+          {/* <li className="nav-item">
             <a className="nav-link" href="/survey">
               Survey
             </a>
-          </li>
-          <li className="nav-item">
+          </li> */}
+          {/* <li className="nav-item">
             <a className="nav-link" href="/enguaries">
               Enquaries
             </a>
-          </li>
-          <li className="nav-item">
+          </li> */}
+          {/* <li className="nav-item">
             <a className="nav-link" href="/content">
               Content
             </a>
-          </li>
+          </li> */}
           <li className="nav-item">
             <a className="nav-link" href="/activities">
               Activities
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/materials">
+              Materials
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/all-instructor">
+              Instructor
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/all-steps">
+              Steps
             </a>
           </li>
         </ul>

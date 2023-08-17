@@ -1,11 +1,14 @@
+/* eslint-disable no-template-curly-in-string */
 import { useEffect, useState } from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { Updatechild } from "./Updatechild";
-
+import './Child.css'
 export const Child = () => {
   const [childData, setChildData] = useState([]);
   const [childId, setChildId] = useState(null);
   const [show, setShow] = useState(false);
+
+  const parentId = localStorage.getItem("userId");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -16,7 +19,7 @@ export const Child = () => {
   };
 
   const fetchChilddata = () => {
-    fetch("http://13.127.11.171:3000/admin-getChildByUserId/1")
+    fetch(`http://13.235.242.110:3000/admin-getChildByUserId/${parentId}`)
       .then((response) => response.json())
       .then((data) => {
         setChildData(data);
@@ -27,7 +30,7 @@ export const Child = () => {
   const childDeleteHandler = async (chId) => {
     try {
       const response = await fetch(
-        `http://13.127.11.171:3000/admin-deleteChildByChildId/${chId}`,
+        `http://13.235.242.110:3000/admin-deleteChildByChildId/${chId}`,
         {
           method: "GET",
         }
@@ -43,18 +46,21 @@ export const Child = () => {
   };
 
   useEffect(() => {
-    fetch("http://13.127.11.171:3000/admin-getChildByUserId/1")
+    fetch("http://13.235.242.110:3000/admin-getChildByUserId/1")
       .then((response) => response.json())
       .then((data) => {
         setChildData(data);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+
   return (
     <>
       <Updatechild show={show} handleClose={handleClose} childId={childId} />
       <div className="container mt-5">
-        <h2 className="mb-3">User Data</h2>
+        <h2>Child Management</h2>
+      <div><p className="welcome-text-child">Welcome to Child Management !</p></div>
+      <div><p className="welcome-text-child2">Here You can manage users child </p></div>
         {childData.length > 0 ? (
           <table className="table table-bordered">
             <thead>
@@ -68,7 +74,7 @@ export const Child = () => {
                 <th>Age</th>
                 <th>Questions</th>
                 <th>Image</th>
-                <th>Created on</th>
+                <th>Enrollment date</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
@@ -81,13 +87,14 @@ export const Child = () => {
                   <td>{ch.nickname}</td>
                   <td>{ch.relation}</td>
                   <td>{ch.gender}</td>
-                  <td>{ch.dob}</td>
+                  <td>{ch.dob.substring(0, 10)}</td>
+
                   <td>{ch.age}</td>
                   <td>{ch.set_of_questions}</td>
-                  <td>{ch.image}</td>
-                  <td>{ch.createdAt}</td>
+                  <td><img src={`http://13.235.242.110:3000/uploads/${ch.image}`} alt="" /></td>
+                  <td>{ch.createdAt.substring(0,10)}</td>
                   <td>
-                    {<AiOutlineEdit onClick={() => childEditHandler(ch.id)} />}
+                    {<AiOutlineEdit onClick={() => childEditHandler(ch.id)} />} 
                   </td>
                   <td>
                     {

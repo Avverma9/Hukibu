@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BiShow } from 'react-icons/bi';
+import {AiOutlineDelete} from 'react-icons/ai'
 import { Modal, Button, Form } from 'react-bootstrap';
-import './Activity.css';
-
+import './Activities.css'
 const Activities = () => {
   const [activitiesData, setActivitiesData] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [activityToDelete, setActivityToDelete] = useState(null); 
   const [newActivity, setNewActivity] = useState({
     name: '',
     time_duration: '',
@@ -14,7 +16,7 @@ const Activities = () => {
   });
 
   useEffect(() => {
-    fetch('http://13.127.11.171:3000/allActivity')
+    fetch('http://13.235.242.110:3000/allActivity')
       .then(response => response.json())
       .then(data => {
         setActivitiesData(data);
@@ -51,6 +53,17 @@ const Activities = () => {
     }));
   };
 
+  const handleDeleteModalOpen = (id) => {
+    setActivityToDelete(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteModalClose = () => {
+    setShowDeleteModal(false);
+    setActivityToDelete(null);
+  };
+
+  // Add 
   const handleAddActivitySubmit = async event => {
     event.preventDefault();
     
@@ -60,24 +73,45 @@ const Activities = () => {
     formData.append('activityImage', newActivity.activityImage);
 
     try {
-      const response = await fetch('http://13.127.11.171:3000/admin-addActivity', {
+      const response = await fetch('http://13.235.242.110:3000/admin-addActivity', {
         method: 'POST',
         body: formData
       });
 
       if (response.ok) {
-        // Refresh activities data after adding new activity
         const newData = await response.json();
         setActivitiesData(prevData => [...prevData, newData]);
         handleCloseModal();
+        window.location.reload('/activities')
+        
       }
     } catch (error) {
       console.error('Error adding activity:', error);
     }
   };
 
+  //Delete 
+  const handleConfirmDelete = async () => {
+    try {
+      const response = await fetch(`http://13.235.242.110:3000/admin-deleteActivityById/${activityToDelete}`, {
+        method: 'GET',
+      });
+
+      if (response.ok) {
+        const updatedActivities = activitiesData.filter(activity => activity.id !== activityToDelete);
+        setActivitiesData(updatedActivities);
+        handleDeleteModalClose();
+      }
+    } catch (error) {
+      console.error('Error deleting activity:', error);
+    }
+  };
+
+
   return (
     <div className="container mt-5">
+      <div><p className="welcome-text-user">Welcome to Activites !</p></div>
+      <div><p className="welcome-text-user2">Here You can manage users Activity ...</p></div>
       <h2 className="mb-3">Activities</h2>
       <button className='add-activity' onClick={handleAddActivity}>Add Activity</button>
       {activitiesData.length > 0 ? (
@@ -89,6 +123,7 @@ const Activities = () => {
                  <th>Name</th>
                  <th>Time Duration</th>
                  <th>View</th>
+                 <th>Delete</th>
                </tr>
              </thead>
              <tbody>
@@ -96,18 +131,16 @@ const Activities = () => {
                  <tr key={activities.id}>
                    <td>{activities.id}</td>
                    <td>{activities.name}</td>
-                   <td>
-                     <img
-                       src={activities.images}
-                       alt={`Activity ${activities.id} Thumbnail`}
-                     />
-                   </td>
+                   <td><img className="activity_image" src={`http://13.235.242.110:3000/uploads/${activities.image}`} alt="" /></td>
                    <td>{activities.time_duration}</td>
                    <td>
                      <Link to={`/activities/${activities.id}`}>
                        <BiShow />
                      </Link>
                    </td>
+                   <td>
+                  <AiOutlineDelete onClick={() => handleDeleteModalOpen(activities.id)} />
+                </td>
                  </tr>
                ))}
              </tbody>
@@ -115,7 +148,9 @@ const Activities = () => {
       ) : (
         <p>No activities data available</p>
       )}
+        
 
+        {/* //Add Modal  */}
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Add New Activity</Modal.Title>
@@ -155,8 +190,26 @@ const Activities = () => {
           </Form>
         </Modal.Body>
       </Modal>
+
+      {/* Delete Modal  */}
+      <Modal show={showDeleteModal} onHide={handleDeleteModalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this activity?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleDeleteModalClose}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
 
-export default Activities;
+export default Activities;
