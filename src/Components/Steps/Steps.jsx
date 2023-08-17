@@ -35,10 +35,10 @@ export const Steps = () => {
            .catch((error) => console.error("Error fetching data:", error));
     }
 
-    const stepDeleteHandler = async (stid) => {
+    const stepDeleteHandler = async (id) => {
          try {
            const response = await fetch(
-             `image.png/admin-deletestepsById/${stid}`,
+             `http://13.235.242.110:3000/admin-deletestepsById/${id}`,
              {
                method: "GET",
              }
@@ -47,6 +47,7 @@ export const Steps = () => {
            if (response.ok) {
              console.log(response);
              fetchStepdata();
+             alert("data deleted")
            }
          } catch (error) {
            console.log("Error:", error);
