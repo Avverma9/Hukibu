@@ -23,7 +23,7 @@ const GetCourses = () => {
    
 
     useEffect(() => {
-        fetch('http://13.127.11.171:3000/courses/all')
+        fetch('http://13.235.242.110:3000/courses/all')
             .then(response => response.json())
             .then(data => {
                 setCourseData(data);
@@ -34,7 +34,7 @@ const GetCourses = () => {
     const openModal = async courseId => {
         setSelectedCourseId(courseId);
         try {
-            const response = await fetch(`http://13.127.11.171:3000/courses/get/${courseId}`);
+            const response = await fetch(`http://13.235.242.110:3000/courses/get/${courseId}`);
             const data = await response.json();
             setCourseDetails(data.course);
             setViewModalVisible(true); 
@@ -95,7 +95,7 @@ const GetCourses = () => {
             formData.append('whatYouGet', newCourse.whatYouGet);
             formData.append('image', newCourse.image);
 
-            const response = await fetch('http://13.127.11.171:3000/admin-addCourse', {
+            const response = await fetch('http://13.235.242.110:3000/admin-addCourse', {
                 method: 'POST',
                 body: formData
             });
@@ -122,7 +122,7 @@ const GetCourses = () => {
         setLoading(true);
     
         try {
-            const response = await fetch(`http://13.127.11.171:3000/admin-updateCourse/${editData.id}`, {
+            const response = await fetch(`http://13.235.242.110:3000/admin-updateCourse/${editData.id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -161,7 +161,7 @@ const GetCourses = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`http://13.127.11.171:3000/admin-deleteCourseById/${deleteUserId}`, {
+            const response = await fetch(`http://13.235.242.110:3000/admin-deleteCourseById/${deleteUserId}`, {
                 method: 'GET'
             });
 
@@ -213,7 +213,7 @@ const GetCourses = () => {
                                 <td>{course.courseName}</td>
                                 <td>{course.courseDesc}</td>
                                 <td>{course.price}</td>
-                                <td><img className="activity_image" src={`http://13.127.11.171:3000/uploads/${course.images}`} alt="" /></td>
+                                <td><img className="activity_image" src={`http://13.235.242.110:3000/uploads/${course.images}`} alt="" /></td>
                                 <td>{course.whatYouGet}</td>
                                 <td><BiShow onClick={() => openModal(course.id)} /></td>
                                 <td>{<AiOutlineEdit onClick={() => handleEditModalOpen(course)} />}</td>
@@ -300,7 +300,7 @@ const GetCourses = () => {
                             <p>Course Name: {courseDetails.courseName}</p>
                             <p>Course Description: {courseDetails.courseDesc}</p>
                             <p>Price: {courseDetails.price}</p>
-                            <p>Images: <img className="course_image" src={`http://13.127.11.171:3000/uploads/${courseDetails.images}`} alt="" /></p>
+                            <p>Images: <img className="course_image" src={`http://13.235.242.110:3000/uploads/${courseDetails.images}`} alt="" /></p>
                             <p>What You Get: {courseDetails.whatYouGet}</p>
                         </div>
                     )}

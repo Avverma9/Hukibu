@@ -46,7 +46,10 @@ const Header = () => {
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <a className="dropdown-item" href="/get-courses">
-                Add a course
+                Manage Course
+              </a>
+              <a className="dropdown-item" href="/add-courses">
+                Add a Course
               </a>
               {/* <a className="dropdown-item" href="#">
                 Update Price

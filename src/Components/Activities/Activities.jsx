@@ -16,7 +16,7 @@ const Activities = () => {
   });
 
   useEffect(() => {
-    fetch('http://13.127.11.171:3000/allActivity')
+    fetch('http://13.235.242.110:3000/allActivity')
       .then(response => response.json())
       .then(data => {
         setActivitiesData(data);
@@ -73,7 +73,7 @@ const Activities = () => {
     formData.append('activityImage', newActivity.activityImage);
 
     try {
-      const response = await fetch('http://13.127.11.171:3000/admin-addActivity', {
+      const response = await fetch('http://13.235.242.110:3000/admin-addActivity', {
         method: 'POST',
         body: formData
       });
@@ -93,7 +93,7 @@ const Activities = () => {
   //Delete 
   const handleConfirmDelete = async () => {
     try {
-      const response = await fetch(`http://13.127.11.171:3000/admin-deleteActivityById/${activityToDelete}`, {
+      const response = await fetch(`http://13.235.242.110:3000/admin-deleteActivityById/${activityToDelete}`, {
         method: 'GET',
       });
 
@@ -131,7 +131,7 @@ const Activities = () => {
                  <tr key={activities.id}>
                    <td>{activities.id}</td>
                    <td>{activities.name}</td>
-                   <td><img className="activity_image" src={`http://13.127.11.171:3000/uploads/${activities.image}`} alt="" /></td>
+                   <td><img className="activity_image" src={`http://13.235.242.110:3000/uploads/${activities.image}`} alt="" /></td>
                    <td>{activities.time_duration}</td>
                    <td>
                      <Link to={`/activities/${activities.id}`}>

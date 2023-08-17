@@ -12,7 +12,7 @@ export const Updatestep = ({ show, handleClose, stepId }) => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://13.127.11.171:3000/admin-getstepsById/${stepId}`)
+    fetch(`http://13.235.242.110:3000/admin-getstepsById/${stepId}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -32,7 +32,7 @@ export const Updatestep = ({ show, handleClose, stepId }) => {
 
     try {
       const response = await fetch(
-        `http://13.127.11.171:3000/admin-updatesteps/${stepId}`,
+        `http://13.235.242.110:3000/admin-updatesteps/${stepId}`,
         {
           method: "POST",
           body: formData,

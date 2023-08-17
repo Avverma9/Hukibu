@@ -18,7 +18,7 @@ export const Steps = () => {
 
 
   useEffect(() => {
-    fetch("http://13.127.11.171:3000/admin-allsteps")
+    fetch("http://13.235.242.110:3000/admin-allsteps")
       .then((response) => response.json())
       .then((data) => {
         setStepData(data);
@@ -27,7 +27,7 @@ export const Steps = () => {
   }, []);
     
     const fetchStepdata = () => {
-         fetch("http://13.127.11.171:3000/admin-allsteps")
+         fetch("http://13.235.242.110:3000/admin-allsteps")
            .then((response) => response.json())
            .then((data) => {
              setStepData(data);
@@ -38,7 +38,7 @@ export const Steps = () => {
     const stepDeleteHandler = async (stid) => {
          try {
            const response = await fetch(
-             `http://13.127.11.171:3000/admin-deletestepsById/${stid}`,
+             `http://13.235.242.110:3000/admin-deletestepsById/${stid}`,
              {
                method: "GET",
              }

@@ -19,7 +19,7 @@ const User = () => {
     const [detailModalShow, setDetailModalShow]=useState(false)
 
     useEffect(() => {
-        fetch('http://13.127.11.171:3000/admin-getUser')
+        fetch('http://13.235.242.110:3000/admin-getUser')
             .then(response => response.json())
             .then(data => {
                 setUserData(data.data);
@@ -51,7 +51,7 @@ const User = () => {
 
     const handleViewModalOpen = async (userId) => {
         try {
-            const response = await fetch(`http://13.127.11.171:3000/getUserById/${userId}`);
+            const response = await fetch(`http://13.235.242.110:3000/getUserById/${userId}`);
             const userData = await response.json();
 
             if (response.ok && userData.success) {
@@ -71,7 +71,7 @@ const User = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`http://13.127.11.171:3000/update/${id}`, {
+            const response = await fetch(`http://13.235.242.110:3000/update/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -92,7 +92,7 @@ const User = () => {
 
             if (response.ok && responseData.success) {
                 window.location.reload("/user")
-
+            
                 setUserData(prevUserData => {
                     return prevUserData.map(user => user.id === id ? responseData.updatedUser : user);
                 });
@@ -115,15 +115,17 @@ const User = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`http://13.127.11.171:3000/admin-deleteUserById/${deleteUserId}`, {
+            const response = await fetch(`http://13.235.242.110:3000/admin-deleteUserById/${deleteUserId}`, {
                 method: 'GET'
             });
 
             const responseData = await response.json();
 
-            if (response.ok && responseData.success) {
+            if (response.ok) {
+                 window.location.reload()
                 setUserData(prevUserData => prevUserData.filter(user => user.id !== deleteUserId));
-                toast.success('User deleted successfully');
+
+                alert('User deleted successfully');
             } else {
                 toast.error('Error deleting user');
             }
@@ -146,12 +148,13 @@ const User = () => {
                 <table className="table table-bordered">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
+                            <th>User ID</th>
+                            <th>Full Name</th>
                             <th>Mobile</th>
                             <th>Email</th>
+                            <th>Profile Image</th>
                           
-                            <th>Edit</th>
+                            <th>Edit/View</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -162,6 +165,7 @@ const User = () => {
                                 <td>{user.name || 'N/A'}</td>
                                 <td>{user.mobile}</td>
                                 <td>{user.email || 'N/A'}</td>
+                                <td><img src={`http://13.235.242.110:3000/uploads/${user.image}`} alt="" /></td>
                                
                                 <td><AiOutlineEdit onClick={() => handleEditModalOpen(user)} /></td>
                                 <td><AiOutlineDelete onClick={() => handleDeleteModalOpen(user.id)} /></td>
@@ -182,22 +186,37 @@ const User = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group>
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={editData.name || ''}
-                                onChange={e => setEditData({ ...editData, name: e.target.value })}
-                            />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Mobile</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={editData.mobile || ''}
-                                onChange={e => setEditData({ ...editData, mobile: e.target.value })}
-                            />
-                        </Form.Group>
+                    <Form.Group>
+    <Form.Label>Full Name</Form.Label>
+    <Form.Control
+        type="text"
+        placeholder='Only Characters Allowed'
+        maxLength={15}
+        value={editData.name || ''}
+        onChange={e => {
+            const inputValue = e.target.value;
+            const onlyCharacters = inputValue.replace(/[^A-Za-z\s]/g, '');
+            setEditData({ ...editData, name: onlyCharacters });
+        }}
+    />
+</Form.Group>
+
+
+<Form.Group>
+    <Form.Label>Mobile</Form.Label>
+    <Form.Control
+        type="number"
+        value={editData.mobile || ''}
+        onChange={e => {
+            let inputValue = e.target.value;
+            inputValue = inputValue.slice(0, 13); 
+            const onlyNumericals = inputValue.replace(/\D/g, ''); 
+            setEditData({ ...editData, mobile: onlyNumericals });
+        }}
+    />
+</Form.Group>
+
+
                         <Form.Group>
                             <Form.Label>Age</Form.Label>
                             <Form.Control
@@ -207,7 +226,7 @@ const User = () => {
                             />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Relation</Form.Label>
+                            <Form.Label>Dad/Mom</Form.Label>
                             <Form.Control
                                 type="text"
                                 value={editData.relation || ''}
@@ -223,7 +242,7 @@ const User = () => {
                             />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Area</Form.Label>
+                            <Form.Label>Area of Interest</Form.Label>
                             <Form.Control
                                 type="text"
                                 value={editData.area || ''}
@@ -231,7 +250,7 @@ const User = () => {
                             />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Education</Form.Label>
+                            <Form.Label>Education Level</Form.Label>
                             <Form.Control
                                 type="text"
                                 value={editData.education || ''}
@@ -246,6 +265,7 @@ const User = () => {
                                 onChange={e => setEditData({ ...editData, vocation: e.target.value })}
                             />
                         </Form.Group>
+                      
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
