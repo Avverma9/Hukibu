@@ -87,9 +87,12 @@ td img {
 
 /* AddCourse.css */
 
+
+
 form {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   max-width: 100%;
   margin: 0 auto;
   gap: 10px;
@@ -116,6 +119,50 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
+.backarrow-btn{
+  background: transparent;
+  font-size: 30px;
+  font-weight: 800;
+  color: blue;
+  
+}
+.add-btn{
+  background: transparent;
+  font-size: 30px;
+  font-weight: 800;
+  color: blue;
+  position: absolute;
+right: 10px;
+top: 60px;
+}
+.addcoarse-form{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.form-field{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+.form-field-a{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.form-field-a label{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-left: 150px;
+}
+.submit-btn{
+  background: transparent;
+  color: blue;
+  font-size: 30px;
+}
+
 
 button:hover {
   
@@ -142,4 +189,5 @@ button:hover {
   font-weight: 900;
   font-size: 25px;
 }
+
 

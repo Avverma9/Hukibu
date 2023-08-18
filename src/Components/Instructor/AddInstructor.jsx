@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import {TbArrowBackUp} from 'react-icons/tb';
+import {FaLocationArrow} from 'react-icons/fa';
 const AddInstructor = () => {
     const navigate=useNavigate()
   const [course_id, setCourse] = useState("");
@@ -41,7 +42,7 @@ const AddInstructor = () => {
 
   return (
     <>
-    <button onClick={Back}>Go Back</button>
+    <button className="backarrow-btn" onClick={Back}><TbArrowBackUp/></button>
     <form onSubmit={handleSubmit}>
       <input
         type="number"
@@ -72,7 +73,7 @@ const AddInstructor = () => {
         placeholder="Enter Occuption"
         onChange={(e) => setOccupation(e.target.value)}
       />
-      <button type="submit">Submit</button>
+      <button className="submit-btn" type="submit"><FaLocationArrow/></button>
     </form>
     </>
   );
