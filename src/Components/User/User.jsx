@@ -19,7 +19,7 @@ const User = () => {
     const [detailModalShow, setDetailModalShow]=useState(false)
 
     useEffect(() => {
-        fetch('http://13.235.242.110:3000/admin-getUser')
+        fetch('http://139.59.68.139:3000/admin-getUser')
             .then(response => response.json())
             .then(data => {
                 setUserData(data.data);
@@ -51,7 +51,7 @@ const User = () => {
 
     const handleViewModalOpen = async (userId) => {
         try {
-            const response = await fetch(`http://13.235.242.110:3000/getUserById/${userId}`);
+            const response = await fetch(`http://139.59.68.139:3000/getUserById/${userId}`);
             const userData = await response.json();
 
             if (response.ok && userData.success) {
@@ -71,7 +71,7 @@ const User = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`http://13.235.242.110:3000/update/${id}`, {
+            const response = await fetch(`http://139.59.68.139:3000/update/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -115,7 +115,7 @@ const User = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`http://13.235.242.110:3000/admin-deleteUserById/${deleteUserId}`, {
+            const response = await fetch(`http://139.59.68.139:3000/admin-deleteUserById/${deleteUserId}`, {
                 method: 'GET'
             });
 
@@ -165,7 +165,7 @@ const User = () => {
                                 <td>{user.name || 'N/A'}</td>
                                 <td>{user.mobile}</td>
                                 <td>{user.email || 'N/A'}</td>
-                                <td><img src={`http://13.235.242.110:3000/uploads/${user.image}`} alt="" /></td>
+                                <td><img src={`http://139.59.68.139:3000/uploads/${user.image}`} alt="" /></td>
                                
                                 <td><AiOutlineEdit onClick={() => handleEditModalOpen(user)} /></td>
                                 <td><AiOutlineDelete onClick={() => handleDeleteModalOpen(user.id)} /></td>

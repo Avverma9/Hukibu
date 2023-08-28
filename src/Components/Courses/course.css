@@ -93,7 +93,7 @@ form {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  max-width: 100%;
+  max-width: 85%;
   margin: 0 auto;
   gap: 10px;
 }
@@ -102,9 +102,15 @@ label {
   margin-top: 10px;
   font-weight: bold;
 }
+/* Your existing CSS */
+
+.bold-text {
+  font-weight: bold;
+}
 
 input {
-  padding: 8px;
+  
+  padding: 4px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;

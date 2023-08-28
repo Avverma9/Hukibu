@@ -6,7 +6,7 @@ const SingleActivities = () => {
   const [activityDetails, setActivityDetails] = useState(null);
 
   useEffect(() => {
-    fetch(`http://13.235.242.110:3000/getActivity/${id}`)
+    fetch(`http://139.59.68.139:3000/getActivity/${id}`)
       .then(response => response.json())
       .then(data => {
         setActivityDetails(data);

@@ -13,13 +13,14 @@ const Courses = () => {
   const [updatedCourseDesc, setUpdatedCourseDesc] = useState("");
   const [updatedPrice, setUpdatedPrice] = useState("");
   const [updatedWhatYouGet, setUpdatedWhatYouGet] = useState(["", "", ""]);
+  const [youtubelink, setYoutubeLink] = useState("");
   const [updatedImage, setUpdatedImage] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
   // get API
   useEffect(() => {
-    fetch("http://13.235.242.110:3000/courses/all")
+    fetch("http://139.59.68.139:3000/courses/all")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((error) => console.error(error));
@@ -28,7 +29,7 @@ const Courses = () => {
   // delete
   const handleDeleteUser = async (id) => {
     const response = await fetch(
-      `http://13.235.242.110:3000/admin-deleteCourseById/${id}`,
+      `http://139.59.68.139:3000/admin-deleteCourseById/${id}`,
       {
         method: "GET",
       }
@@ -46,6 +47,7 @@ const Courses = () => {
     setUpdatedCourseDesc(course.courseDesc);
     setUpdatedPrice(course.price);
     setUpdatedWhatYouGet(course.whatYouGet);
+    setYoutubeLink(course.youtubelink);
     setUpdatedImage(course.image);
     setUpdate(course);
     setShowUpdateForm(true);
@@ -58,12 +60,13 @@ const Courses = () => {
     formData.append("courseDesc", e.target.courseDesc.value);
     formData.append("price", e.target.price.value);
     formData.append("whatYouGet", e.target.whatYouGet.value);
+    formData.append("youtubelink", e.target.youtubelink.value);
     formData.append("image", e.target.image.files[0]);
 
     if (update && update.id) {
       try {
         const response = await axios.post(
-          `http://13.235.242.110:3000/admin-updateCourse/${update.id}`,
+          `http://139.59.68.139:3000/admin-updateCourse/${update.id}`,
           formData,
           {
             headers: {
@@ -74,6 +77,7 @@ const Courses = () => {
 
         if (response.data) {
           alert("Updated successfully");
+          window.location.reload("/get-courses")
           setShowUpdateForm(false);
         } else {
           alert("Update failed");
@@ -120,28 +124,39 @@ const Courses = () => {
                   <form className="input-form-data" onSubmit={(e) => handleUpdateSubmit(e)}>
                     <input
                       type="text"
+                      placeholder="Enter course name"
                       name="courseName"
                       defaultValue={updatedCourseName}
                     />
-                    <input
+                    <textarea
                       type="text"
+                      placeholder="Enter course description"
                       name="courseDesc"
                       defaultValue={updatedCourseDesc}
                     />
                     <input
                       type="text"
+                      placeholder="What you get"
                       name="whatYouGet"
                       defaultValue={updatedWhatYouGet}
                     />
                     <input
                       type="text"
+                      placeholder="Price"
                       name="price"
                       defaultValue={updatedPrice}
                     />
                     <input
                       type="file"
+                      placeholder="Image"
                       name="image"
                       defaultValue={updatedImage}
+                    />
+                     <input
+                      type="text"
+                      placeholder="Enter your content link"
+                      name="youtubelink"
+                      defaultValue={youtubelink}
                     />
                     <button className="sub-btn-btn" type="submit"><CiLocationArrow1/></button>
                     <button className="cross-btn" onClick={() => setShowUpdateForm(false)}>
@@ -161,6 +176,7 @@ const Courses = () => {
               <th>Price</th>
               <th>What You Get</th>
               <th>Image</th>
+              <th>Content</th>
               <th>Added at</th>
               <th>Delete</th>
               <th>Update</th>
@@ -171,16 +187,18 @@ const Courses = () => {
               <tr key={e.id}>
                 <td>{e.id}</td>
                 <td>{e.courseName}</td>
-                <td>{e.courseDesc}</td>
+                <td className="bold-text">{e.courseDesc}</td>
+
                 <td>{e.price}</td>
                 <td>{e.whatYouGet}</td>
                 <td>
                   <img
-                    src={`http://13.235.242.110:3000/uploads/${e.images}`}
+                    src={`http://139.59.68.139:3000/uploads/${e.images}`}
                     alt=""
                     style={{ maxWidth: "100px", maxHeight: "100px" }}
                   />
                 </td>
+                <td>{e.youtubelink}</td>
 <td>{e.createdAt.substring(0,10)}</td>
                 <td>
                   <button className="dlt-btn" onClick={() => handleDeleteUser(e.id)}><AiOutlineDelete/></button>

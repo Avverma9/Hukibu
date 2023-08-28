@@ -19,7 +19,7 @@ const Back=()=>{
 }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post("http://13.235.242.110:3000/admin-addmaterials", {
+    const response = await axios.post("http://139.59.68.139:3000/admin-addmaterials", {
       activity_id,
       material_name
     });
@@ -29,14 +29,14 @@ const Back=()=>{
   };
 
   useEffect(() => {
-    fetch('http://13.235.242.110:3000/admin-allmaterials')
+    fetch('http://139.59.68.139:3000/admin-allmaterials')
       .then(response => response.json())
       .then(data => setData(data))
       .catch(error => console.error(error));
   }, []);
 
   const handleDelete = async (id) => {
-    const response = await fetch(`http://13.235.242.110:3000/admin-deletematerialsById/${id}`, {
+    const response = await fetch(`http://139.59.68.139:3000/admin-deletematerialsById/${id}`, {
       method: "GET"
     });
     if (response.ok) {
@@ -45,7 +45,7 @@ const Back=()=>{
   };
 
   const getById = async (id) => {
-    const res = await fetch(`http://13.235.242.110:3000/admin-getmaterialsById/${id}`);
+    const res = await fetch(`http://139.59.68.139:3000/admin-getmaterialsById/${id}`);
     const data = await res.json();
     setData(data);
   };

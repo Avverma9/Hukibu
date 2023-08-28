@@ -18,7 +18,7 @@ export const Steps = () => {
 
 
   useEffect(() => {
-    fetch("http://13.235.242.110:3000/admin-allsteps")
+    fetch("http://139.59.68.139:3000/admin-allsteps")
       .then((response) => response.json())
       .then((data) => {
         setStepData(data);
@@ -27,7 +27,7 @@ export const Steps = () => {
   }, []);
     
     const fetchStepdata = () => {
-         fetch("http://13.235.242.110:3000/admin-allsteps")
+         fetch("http://139.59.68.139:3000/admin-allsteps")
            .then((response) => response.json())
            .then((data) => {
              setStepData(data);
@@ -38,7 +38,7 @@ export const Steps = () => {
     const stepDeleteHandler = async (id) => {
          try {
            const response = await fetch(
-             `http://13.235.242.110:3000/admin-deletestepsById/${id}`,
+             `http://139.59.68.139:3000/admin-deletestepsById/${id}`,
              {
                method: "GET",
              }
@@ -74,7 +74,9 @@ export const Steps = () => {
                 <tr>
                   <th>ID</th>
                   <th>Activity Id</th>
+                  <th>Title</th>
                   <th>Step Description</th>
+                  <th>Image</th>
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
@@ -84,7 +86,10 @@ export const Steps = () => {
                   <tr key={ch.id}>
                     <td>{ch.id}</td>
                     <td>{ch.activity_id}</td>
+                    <td>{ch.title}</td>
                     <td>{ch.step_description}</td>
+                    <td><img src={`http://139.59.68.139:3000/uploads/${ch.image}`} alt={ch.image} /></td>
+
                     <td>
                       {<AiOutlineEdit onClick={() => stepEditHandler(ch.id)} />}
                     </td>

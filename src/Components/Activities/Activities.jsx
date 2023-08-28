@@ -12,11 +12,13 @@ const Activities = () => {
   const [newActivity, setNewActivity] = useState({
     name: '',
     time_duration: '',
+    labels: "",
+    description: "",
     activityImage: null
   });
 
   useEffect(() => {
-    fetch('http://13.235.242.110:3000/allActivity')
+    fetch('http://139.59.68.139:3000/allActivity')
       .then(response => response.json())
       .then(data => {
         setActivitiesData(data);
@@ -33,6 +35,8 @@ const Activities = () => {
     setNewActivity({
       name: '',
       time_duration: '',
+      labels: "",
+      description: "",
       activityImage: null
     });
   };
@@ -71,9 +75,11 @@ const Activities = () => {
     formData.append('name', newActivity.name);
     formData.append('time_duration', newActivity.time_duration);
     formData.append('activityImage', newActivity.activityImage);
+    formData.append("description",newActivity.description)
+    formData.append("labels",newActivity.labels)
 
     try {
-      const response = await fetch('http://13.235.242.110:3000/admin-addActivity', {
+      const response = await fetch('http://139.59.68.139:3000/admin-addActivity', {
         method: 'POST',
         body: formData
       });
@@ -93,7 +99,7 @@ const Activities = () => {
   //Delete 
   const handleConfirmDelete = async () => {
     try {
-      const response = await fetch(`http://13.235.242.110:3000/admin-deleteActivityById/${activityToDelete}`, {
+      const response = await fetch(`http://139.59.68.139:3000/admin-deleteActivityById/${activityToDelete}`, {
         method: 'GET',
       });
 
@@ -122,24 +128,28 @@ const Activities = () => {
                  <th>Images</th>
                  <th>Name</th>
                  <th>Time Duration</th>
+                 <th>Lables</th>
+                 <th>Description</th>
                  <th>View</th>
                  <th>Delete</th>
                </tr>
              </thead>
              <tbody>
-               {activitiesData.map(activities => (
-                 <tr key={activities.id}>
-                   <td>{activities.id}</td>
-                   <td>{activities.name}</td>
-                   <td><img className="activity_image" src={`http://13.235.242.110:3000/uploads/${activities.image}`} alt="" /></td>
-                   <td>{activities.time_duration}</td>
+               {activitiesData.map(e => (
+                 <tr key={e.id}>
+                   <td>{e.id}</td>
+                   <td>{e.name}</td>
+                   <td><img className="activity_image" src={`http://139.59.68.139:3000/uploads/${e.image}`} alt="" /></td>
+                   <td>{e.time_duration}</td>
+                   <td>{e.labels}</td>
+                   <td>{e.description}</td>
                    <td>
-                     <Link to={`/activities/${activities.id}`}>
+                     <Link to={`/activities/${e.id}`}>
                        <BiShow />
                      </Link>
                    </td>
                    <td>
-                  <AiOutlineDelete onClick={() => handleDeleteModalOpen(activities.id)} />
+                  <AiOutlineDelete onClick={() => handleDeleteModalOpen(e.id)} />
                 </td>
                  </tr>
                ))}
@@ -172,6 +182,25 @@ const Activities = () => {
                 type="text"
                 name="time_duration"
                 value={newActivity.time_duration}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+  
+            <Form.Group>
+              <Form.Label>Add Labels</Form.Label>
+              <Form.Control
+                type="text"
+                name="labels"
+                value={newActivity.labels}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Add Description</Form.Label>
+              <Form.Control
+                type="text"
+                name="description"
+                value={newActivity.description}
                 onChange={handleInputChange}
               />
             </Form.Group>

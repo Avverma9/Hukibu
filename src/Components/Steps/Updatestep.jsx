@@ -7,12 +7,15 @@ import Modal from "react-bootstrap/Modal";
 export const Updatestep = ({ show, handleClose, stepId }) => {
   const [activityId, setActivityId] = useState("");
   const [stepDesc, setStepDesc] = useState("");
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState(null);
+
   const [stepData, setStepData] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://13.235.242.110:3000/admin-getstepsById/${stepId}`)
+    fetch(`http://139.59.68.139:3000/admin-getstepsById/${stepId}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -29,10 +32,13 @@ export const Updatestep = ({ show, handleClose, stepId }) => {
     const formData = new FormData();
     formData.append("activityId", activityId);
     formData.append("stepDesc", stepDesc);
+    formData.append("title", title);
+    formData.append("image", image);
+   
 
     try {
       const response = await fetch(
-        `http://13.235.242.110:3000/admin-updatesteps/${stepId}`,
+        `http://139.59.68.139:3000/admin-updatesteps/${stepId}`,
         {
           method: "POST",
           body: formData,
@@ -44,6 +50,8 @@ export const Updatestep = ({ show, handleClose, stepId }) => {
         // Reset form fields
         setActivityId("");
         setStepDesc("");
+        setTitle("");
+        setImage(null);
         handleClose();
       }
     } catch (error) {
@@ -60,16 +68,16 @@ export const Updatestep = ({ show, handleClose, stepId }) => {
         <Form>
           <Form.Group>
             <Form.Label>Activity Id</Form.Label>
+            <Form.Control
+              type="text"
+              value={
+                !isLoading && stepData.length !== 0
+                  ? stepData[0].activity_id
+                  : activityId
+              }
+              onChange={(e) => setActivityId(e.target.value)}
+            />
           </Form.Group>
-          <Form.Control
-            type="text"
-            value={
-              !isLoading && stepData.length !== 0
-                ? stepData[0].activity_id
-                : activityId
-            }
-            onChange={(e) => setActivityId(e.target.value)}
-          />
           <Form.Group>
             <Form.Label>Step Description</Form.Label>
             <Form.Control
@@ -80,6 +88,22 @@ export const Updatestep = ({ show, handleClose, stepId }) => {
                   : stepDesc
               }
               onChange={(e) => setStepDesc(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Step Title</Form.Label>
+            <Form.Control
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </Form.Group>
+     
+          <Form.Group>
+            <Form.Label>Step Image</Form.Label>
+            <Form.Control
+              type="file"
+              onChange={(e) => setImage(e.target.files[0])}
             />
           </Form.Group>
         </Form>

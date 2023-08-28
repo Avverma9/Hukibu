@@ -19,7 +19,7 @@ export const Child = () => {
   };
 
   const fetchChilddata = () => {
-    fetch(`http://13.235.242.110:3000/admin-getChildByUserId/${parentId}`)
+    fetch(`http://139.59.68.139:3000/admin-getChildByUserId/${parentId}`)
       .then((response) => response.json())
       .then((data) => {
         setChildData(data);
@@ -30,7 +30,7 @@ export const Child = () => {
   const childDeleteHandler = async (chId) => {
     try {
       const response = await fetch(
-        `http://13.235.242.110:3000/admin-deleteChildByChildId/${chId}`,
+        `http://139.59.68.139:3000/admin-deleteChildByChildId/${chId}`,
         {
           method: "GET",
         }
@@ -46,7 +46,7 @@ export const Child = () => {
   };
 
   useEffect(() => {
-    fetch("http://13.235.242.110:3000/admin-getChildByUserId/1")
+    fetch("http://139.59.68.139:3000/admin-getChildByUserId/1")
       .then((response) => response.json())
       .then((data) => {
         setChildData(data);
@@ -91,7 +91,7 @@ export const Child = () => {
 
                   <td>{ch.age}</td>
                   <td>{ch.set_of_questions}</td>
-                  <td><img src={`http://13.235.242.110:3000/uploads/${ch.image}`} alt="" /></td>
+                  <td><img src={`http://139.59.68.139:3000/uploads/${ch.image}`} alt="" /></td>
                   <td>{ch.createdAt.substring(0,10)}</td>
                   <td>
                     {<AiOutlineEdit onClick={() => childEditHandler(ch.id)} />} 

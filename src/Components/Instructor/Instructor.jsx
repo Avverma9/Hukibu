@@ -16,7 +16,7 @@ export const Instructor = () => {
   };
 
   useEffect(() => {
-    fetch("http://13.235.242.110:3000/admin-allinstructor")
+    fetch("http://139.59.68.139:3000/admin-allinstructor")
       .then((response) => response.json())
       .then((data) => {
         setInstructorData(data);
@@ -25,7 +25,7 @@ export const Instructor = () => {
   }, []);
 
   const fetchInstructor = () => {
-    fetch("http://13.235.242.110:3000/admin-allinstructor")
+    fetch("http://139.59.68.139:3000/admin-allinstructor")
       .then((response) => response.json())
       .then((data) => {
         setInstructorData(data);
@@ -34,7 +34,7 @@ export const Instructor = () => {
   };
 
   const viewInstructorHandler = (Instid) => {
-    fetch(`http://13.235.242.110:3000/admin-getinstructorById/${Instid}`)
+    fetch(`http://139.59.68.139:3000/admin-getinstructorById/${Instid}`)
       .then((response) => response.json())
       .then((data) => {
         setInstructorData(data);
@@ -45,7 +45,7 @@ export const Instructor = () => {
   const deleteInstructorHandler = async (Id) => {
     try {
       const response = await fetch(
-        `http://13.235.242.110:3000/admin-deleteinstructorById/${Id}`,
+        `http://139.59.68.139:3000/admin-deleteinstructorById/${Id}`,
         {
           method: "GET",
         }
@@ -92,7 +92,7 @@ export const Instructor = () => {
                   <td>{ch.name}</td>
                   <td>{ch.description}</td>
                   <td>
-                    <img src={`http://13.235.242.110:3000/uploads/${ch.image}`} alt={ch.image} />
+                    <img src={`http://139.59.68.139:3000/uploads/${ch.image}`} alt={ch.image} />
                   </td>
                   <td>{ch.occupation}</td>
                   <td>

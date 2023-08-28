@@ -25,13 +25,14 @@ const AddInstructor = () => {
     formData.append("image", image); // Append the image file object
 
     try {
-      const response = await fetch("http://13.235.242.110:3000/admin-addinstructor", {
+      const response = await fetch("http://139.59.68.139:3000/admin-addinstructor", {
         method: "POST",
         body: formData,
       });
 
       if (response.ok) {
         alert("Data has been created");
+        window.location.reload()
       } else {
         console.error("Failed to create data");
       }
