@@ -18,7 +18,7 @@ export const Steps = () => {
 
 
   useEffect(() => {
-    fetch("http://13.127.11.171:3000/admin-allsteps")
+    fetch("http://139.59.68.139:3000/admin-allsteps")
       .then((response) => response.json())
       .then((data) => {
         setStepData(data);
@@ -27,7 +27,7 @@ export const Steps = () => {
   }, []);
     
     const fetchStepdata = () => {
-         fetch("http://13.127.11.171:3000/admin-allsteps")
+         fetch("http://139.59.68.139:3000/admin-allsteps")
            .then((response) => response.json())
            .then((data) => {
              setStepData(data);
@@ -35,10 +35,10 @@ export const Steps = () => {
            .catch((error) => console.error("Error fetching data:", error));
     }
 
-    const stepDeleteHandler = async (stid) => {
+    const stepDeleteHandler = async (id) => {
          try {
            const response = await fetch(
-             `http://13.127.11.171:3000/admin-deletestepsById/${stid}`,
+             `http://139.59.68.139:3000/admin-deletestepsById/${id}`,
              {
                method: "GET",
              }
@@ -47,6 +47,7 @@ export const Steps = () => {
            if (response.ok) {
              console.log(response);
              fetchStepdata();
+             alert("data deleted")
            }
          } catch (error) {
            console.log("Error:", error);
@@ -61,13 +62,21 @@ export const Steps = () => {
         <div><p className="welcome-text-user">Welcome to Steps !</p></div>
       <div><p className="welcome-text-user2">Here You can manage steps ...</p></div>
           <h2 className="mb-3">Steps Data</h2>
+          <button style={{ backgroundColor: "black", textDecoration: "none" }}>
+  <a href="/add-steps" style={{ textDecoration: "none", color: "white" }}>
+    Add Steps
+  </a>
+</button>
+
           {stepData.length > 0 ? (
             <table className="table table-bordered">
               <thead>
                 <tr>
                   <th>ID</th>
                   <th>Activity Id</th>
+                  <th>Title</th>
                   <th>Step Description</th>
+                  <th>Image</th>
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
@@ -77,7 +86,10 @@ export const Steps = () => {
                   <tr key={ch.id}>
                     <td>{ch.id}</td>
                     <td>{ch.activity_id}</td>
+                    <td>{ch.title}</td>
                     <td>{ch.step_description}</td>
+                    <td><img src={`http://139.59.68.139:3000/uploads/${ch.image}`} alt={ch.image} /></td>
+
                     <td>
                       {<AiOutlineEdit onClick={() => stepEditHandler(ch.id)} />}
                     </td>

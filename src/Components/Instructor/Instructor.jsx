@@ -16,7 +16,7 @@ export const Instructor = () => {
   };
 
   useEffect(() => {
-    fetch("http://13.127.11.171:3000/admin-allinstructor")
+    fetch("http://139.59.68.139:3000/admin-allinstructor")
       .then((response) => response.json())
       .then((data) => {
         setInstructorData(data);
@@ -25,7 +25,7 @@ export const Instructor = () => {
   }, []);
 
   const fetchInstructor = () => {
-    fetch("http://13.127.11.171:3000/admin-allinstructor")
+    fetch("http://139.59.68.139:3000/admin-allinstructor")
       .then((response) => response.json())
       .then((data) => {
         setInstructorData(data);
@@ -34,7 +34,7 @@ export const Instructor = () => {
   };
 
   const viewInstructorHandler = (Instid) => {
-    fetch(`http://13.127.11.171:3000/admin-getinstructorById/${Instid}`)
+    fetch(`http://139.59.68.139:3000/admin-getinstructorById/${Instid}`)
       .then((response) => response.json())
       .then((data) => {
         setInstructorData(data);
@@ -45,7 +45,7 @@ export const Instructor = () => {
   const deleteInstructorHandler = async (Id) => {
     try {
       const response = await fetch(
-        `http://13.127.11.171:3000/admin-deleteinstructorById/${Id}`,
+        `http://139.59.68.139:3000/admin-deleteinstructorById/${Id}`,
         {
           method: "GET",
         }
@@ -65,6 +65,11 @@ export const Instructor = () => {
       <div className="container mt-5">
       <div><p className="welcome-text-user">Welcome to Instructor Page !</p></div>
       <div><p className="welcome-text-user2">Here You can manage Instructor data</p></div>
+      <button style={{ backgroundColor: "black", textDecoration: "none" }}>
+  <a href="/add-instructor" style={{ textDecoration: "none", color: "white" }}>
+    Add Instructor
+  </a>
+</button>
         <h2 className="mb-3">Instructors</h2>
         {instructorData.length > 0 ? (
           <table className="table table-bordered">
@@ -87,7 +92,7 @@ export const Instructor = () => {
                   <td>{ch.name}</td>
                   <td>{ch.description}</td>
                   <td>
-                    <img src={ch.image} alt={ch.image} />
+                    <img src={`http://139.59.68.139:3000/uploads/${ch.image}`} alt={ch.image} />
                   </td>
                   <td>{ch.occupation}</td>
                   <td>

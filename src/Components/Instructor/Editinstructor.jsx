@@ -116,14 +116,28 @@ export const Editinstructor = ({ show, handleClose, instId }) => {
           <Form.Group>
             <Form.Label>Image</Form.Label>
             <Form.Control
-              type="text"
-              value={
-                !isLoading && instructor.length !== 0
-                  ? instructor[0].image
-                  : image
-              }
-              onChange={(e) => setImage(e.target.value)}
-            />
+  type="text"
+  value={
+    !isLoading && instructor.length !== 0
+      ? instructor[0].image
+      : image
+  }
+  onChange={(e) => setImage(e.target.value)}
+/>
+
+<div style={{ marginTop: '10px' }}>
+  {(!isLoading && instructor.length !== 0) && (
+    <img
+      src={`http://13.127.11.171:3000/uploads/${instructor[0].image}`}
+      alt=""
+      style={{
+        maxWidth: '100px', 
+        maxHeight: '100px', 
+        border: '1px solid #ccc', 
+      }}
+    />
+  )}
+</div>
           </Form.Group>
         </Form>
       </Modal.Body>

@@ -27,7 +27,7 @@ export const Updatechild = ({ show, handleClose, childId }) => {
 
     try {
       const response = await fetch(
-        `http://13.127.11.171:3000/admin-updateChild/${childId}`,
+        `http://139.59.68.139:3000/admin-updateChild/${childId}`,
         {
           method: "POST",
           body: formData,
