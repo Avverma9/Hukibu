@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BiShow } from 'react-icons/bi';
-import {AiOutlineDelete} from 'react-icons/ai'
+import {AiOutlineDelete,AiOutlineEdit} from 'react-icons/ai'
 import { Modal, Button, Form } from 'react-bootstrap';
 import './Activities.css'
 const Activities = () => {
   const [activitiesData, setActivitiesData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [activityToDelete, setActivityToDelete] = useState(null); 
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [activityToDelete, setActivityToDelete] = useState(null);
+  const [activityToUpdate, setActivityToUpdate] = useState(null); 
+  const [updatedActivity, setUpdatedActivity] = useState({});
+  
   const [newActivity, setNewActivity] = useState({
     name: '',
     time_duration: '',
@@ -114,6 +118,74 @@ const Activities = () => {
   };
 
 
+
+  const handleUpdateModalOpen = (activity) => {
+    setActivityToUpdate(activity);
+    setShowUpdateModal(true);
+    setUpdatedActivity({
+      name: activity.name,
+      time_duration: activity.time_duration,
+      labels: activity.labels,
+      description: activity.description,
+      activityImage:activity.image
+    });
+  };
+
+  const handleCloseUpdateModal = () => {
+    setShowUpdateModal(false);
+    setActivityToUpdate(null);
+    setUpdatedActivity({});
+  };
+
+  const handleUpdateInputChange = (event) => {
+    const { name, value } = event.target;
+    setUpdatedActivity((prevActivity) => ({
+      ...prevActivity,
+      [name]: value,
+    }));
+  };
+
+  const handleUpdateActivitySubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("name", updatedActivity.name);
+    formData.append("time_duration", updatedActivity.time_duration);
+    formData.append("labels", updatedActivity.labels);
+    formData.append("description", updatedActivity.description)
+    // formData.append('activityImage', updatedActivity.activityImage);
+
+    if (updatedActivity.activityImage) {
+      formData.append("activityImage", updatedActivity.activityImage);
+    }
+    
+
+    try {
+      const response = await fetch(
+        `http://139.59.68.139:3000/admin-updateActivityById/${activityToUpdate.id}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        const updatedActivities = activitiesData.map((activity) =>
+          activity.id === activityToUpdate.id
+            ? { ...activity, ...updatedActivity }
+            : activity
+        );
+
+        setActivitiesData(updatedActivities);
+        handleCloseUpdateModal();
+      }
+    } catch (error) {
+      console.error("Error updating activity:", error);
+    }
+  };
+  
+  console.log(activitiesData)
+
   return (
     <div className="container mt-5">
       <div><p className="welcome-text-user">Welcome to Activites !</p></div>
@@ -131,6 +203,7 @@ const Activities = () => {
                  <th>Lables</th>
                  <th>Description</th>
                  <th>View</th>
+                 <th>Update</th>
                  <th>Delete</th>
                </tr>
              </thead>
@@ -147,6 +220,9 @@ const Activities = () => {
                      <Link to={`/activities/${e.id}`}>
                        <BiShow />
                      </Link>
+                   </td>
+                   <td>
+                   <AiOutlineEdit onClick={() => handleUpdateModalOpen(e)} />
                    </td>
                    <td>
                   <AiOutlineDelete onClick={() => handleDeleteModalOpen(e.id)} />
@@ -236,6 +312,66 @@ const Activities = () => {
             Delete
           </Button>
         </Modal.Footer>
+      </Modal>
+
+
+      {/* Update Modal  */}
+      <Modal show={showUpdateModal} onHide={handleCloseUpdateModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Activity</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleUpdateActivitySubmit}>
+            <Form.Group>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={updatedActivity.name || ""}
+                onChange={handleUpdateInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Time Duration</Form.Label>
+              <Form.Control
+                type="text"
+                name="time_duration"
+                value={updatedActivity.time_duration || ""}
+                onChange={handleUpdateInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Add Labels</Form.Label>
+              <Form.Control
+                type="text"
+                name="labels"
+                value={updatedActivity.labels || ""}
+                onChange={handleUpdateInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Add Description</Form.Label>
+              <Form.Control
+                type="text"
+                name="description"
+                value={updatedActivity.description || ""}
+                onChange={handleUpdateInputChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Activity Image</Form.Label>
+              <Form.Control
+                type="file"
+                name="activityImage"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Update
+            </Button>
+          </Form>
+        </Modal.Body>
       </Modal>
     </div>
   );

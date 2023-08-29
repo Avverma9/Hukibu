@@ -132,6 +132,7 @@ const User = () => {
 
             setLoading(false);
             handleDeleteModalClose();
+            window.location.reload("/user")
         } catch (error) {
             console.error('Error deleting user:', error);
             setLoading(false);
