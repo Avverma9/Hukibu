@@ -56,7 +56,7 @@ const Intro = () => {
         setError("Failed to delete intro");
       }
     } catch (error) {
-      setError("Error deleting intro: " + error.message);
+      setError("Error deleting intro: " + error.message)
     }
   };
 
