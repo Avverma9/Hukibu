@@ -1,126 +1,105 @@
-import React, { useEffect, useState } from 'react'
-import styles from "./Survey.module.css"
-import { FiDelete } from 'react-icons/fi';
-import { Modal, Button } from 'react-bootstrap';
-
+import React, { useEffect, useState } from "react";
+import styles from "./Survey.module.css";
+import { FiDelete } from "react-icons/fi";
+import { Modal, Button } from "react-bootstrap";
 
 const Survey = () => {
-    const [surveyData, setSurveyData] = useState([]);
-    const [showAddModal, setShowAddModal] = useState(false);
-    const [newQuestion, setNewQuestion] = useState('');
-    const [title, setTitle] = useState('');
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [deletingItemId, setDeletingItemId] = useState('');
-    const [showAll, setShowAll] = useState(false);
+  const [surveyData, setSurveyData] = useState([]);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [question, setQuestion] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deletingItemId, setDeletingItemId] = useState("");
+  const [showAll, setShowAll] = useState(false);
 
-    const fetchSurveyData = () => {
-        fetch('https://hukibu.onrender.com/get/survey')
-          .then((response) => response.json())
-          .then((data) => setSurveyData(data))
-          .catch((error) => console.error('Error fetching survey data:', error));
-      };
-    
-      useEffect(() => {
-        fetchSurveyData();
-      }, []);
-    
-      const handleAddSurveyItem = () => {
-        fetch('https://hukibu.onrender.com/create/survey', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ question: newQuestion, title: title }),
-        })
-          .then((response) => response.json())
-          .then(() => {
-            setShowAddModal(false); 
-            setNewQuestion(''); 
-            setTitle('');
-            fetchSurveyData(); 
-          })
-          .catch((error) => console.error('Error adding survey item:', error));
-      };
-    
-      const handleDeleteSurveyItem = () => {
-        fetch(`https://hukibu.onrender.com/delete/survey/${deletingItemId}`, {
-          method: 'DELETE',
-        })
-          .then((response) => response.json())
-          .then(() => {
-            setShowDeleteModal(false); 
-            setDeletingItemId(''); 
-            fetchSurveyData(); 
-          })
-          .catch((error) => console.error('Error deleting survey item:', error));
-      };
-    
-      const handleAddModalOpen = () => {
-        setShowAddModal(true);
-      };
-    
-      const handleAddModalClose = () => {
+  const fetchSurveyData = () => {
+    fetch("http://139.59.68.139:3000/admin-get-all-survey")
+      .then((response) => response.json())
+      .then((data) => setSurveyData(data.data))
+      .catch((error) => console.error("Error fetching survey data:", error));
+  };
+
+  useEffect(() => {
+    fetchSurveyData();
+  }, []);
+
+  const handleAddSurveyItem = () => {
+    fetch("http://139.59.68.139:3000/admin-add-survey", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ question: question }),
+    })
+      .then((response) => response.json())
+      .then(() => {
         setShowAddModal(false);
-        setNewQuestion('');
-        setTitle('');
-      };
-    
-      const handleDeleteModalOpen = (id) => {
-        setDeletingItemId(id);
-        setShowDeleteModal(true);
-      };
-    
-      const handleDeleteModalClose = () => {
-        setShowDeleteModal(false);
-        setDeletingItemId('');
-      };
-    
-      const handleSeeMoreClick = () => {
-        setShowAll(!showAll);
-      };
+        setQuestion("");
+        fetchSurveyData();
+      })
+      .catch((error) => console.error("Error adding survey item:", error));
+  };
 
+  const handleDeleteSurveyItem = () => {
+    fetch(`http://139.59.68.139:3000/admin-delete-survey/${deletingItemId}`, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then(() => {
+        setShowDeleteModal(false);
+        setDeletingItemId("");
+        fetchSurveyData();
+      })
+      .catch((error) => console.error("Error deleting survey item:", error));
+  };
+
+  const handleAddModalOpen = () => {
+    setShowAddModal(true);
+  };
+
+  const handleAddModalClose = () => {
+    setShowAddModal(false);
+    setQuestion("");
+  };
+
+  const handleDeleteModalOpen = (id) => {
+    setDeletingItemId(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteModalClose = () => {
+    setShowDeleteModal(false);
+    setDeletingItemId("");
+  };
+
+  const handleSeeMoreClick = () => {
+    setShowAll(!showAll);
+  };
 
   return (
     <>
-    <div className={styles.category}>
-      <h2>Category Definition Skills</h2>
-    
-      <div className={styles.flex}>
-        <p className={styles.box}>Creativity</p>
-        <p className={styles.box}>Collaboration</p>
-        <button className={styles.btn}>Add More</button>
-      </div>
-      <div  className={styles.flex} style={{marginTop:"10px"}}>
-        <p className={styles.box}>Creativity</p>
-        <p className={styles.box}>Collaboration</p>
-        <button className={styles.btn}>Remove</button>
-      </div>
-
-       
-    </div>
-
-    {/* ------------------------------------------------------ */}
-          <div className={styles.cancelflex} key="survey-header">
+      {/* ------------------------------------------------------ */}
+      <div className={styles.cancelflex} key="survey-header">
         <h2>Survey questions</h2>
         <button className={styles.seemore} onClick={handleAddModalOpen}>
           Add Questions
         </button>
       </div>
 
-
-      {surveyData.slice(0, showAll ? surveyData.length : 2).map((surveyItem) => (
-        <div key={surveyItem._id} className={styles.survey}>
-          <div className={styles.cancelflex}>
-            <h2>Q. {surveyItem.title}</h2>
-            <h4 onClick={() => handleDeleteModalOpen(surveyItem._id)}>
-              <FiDelete />
-            </h4>
+      {Array.isArray(surveyData) && surveyData
+  .slice(0, showAll ? surveyData.length : 2)
+  .map((surveyItem) => (
+          <div key={surveyItem.id} className={styles.survey}>
+            <div className={styles.cancelflex}>
+              <h6>Q. {surveyItem.question}</h6>
+              <h4 onClick={() => handleDeleteModalOpen(surveyItem.id)}>
+                <FiDelete />
+              </h4>
+            </div>
+           
           </div>
-          <p>{surveyItem.question}</p>
-        </div>
-      ))}
+        ))}
 
-<button className={styles.seemore} onClick={handleSeeMoreClick}>
+      <button className={styles.seemore} onClick={handleSeeMoreClick}>
         {showAll ? "Show Less" : "See More"}
       </button>
 
@@ -130,28 +109,16 @@ const Survey = () => {
         </Modal.Header>
         <Modal.Body>
           <form>
-          <div className="form-group">
-              <label htmlFor="titleInput">Title</label>
+            <div className="form-group">
+              <label htmlFor="titleInput">Question</label>
               <textarea
                 className="form-control"
                 rows="5"
                 id="titleInput"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
               />
             </div>
-
-            <div className="form-group">
-              <label htmlFor="questionInput">Question:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="questionInput"
-                value={newQuestion}
-                onChange={(e) => setNewQuestion(e.target.value)}
-              />
-            </div>
-            
           </form>
         </Modal.Body>
         <Modal.Footer>
@@ -163,7 +130,6 @@ const Survey = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
 
       <Modal show={showDeleteModal} onHide={handleDeleteModalClose}>
         <Modal.Header closeButton>
@@ -182,7 +148,7 @@ const Survey = () => {
         </Modal.Footer>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default Survey
+export default Survey;

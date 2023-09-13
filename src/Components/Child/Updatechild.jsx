@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -11,6 +11,7 @@ export const Updatechild = ({ show, handleClose, childId }) => {
   const [dob, setDob] = useState("");
   const [age, setAge] = useState("");
   const [questions, setQuestions] = useState("");
+  const [image, setImage] = useState(null); // State to hold the selected image file
 
   const updateChildHandler = async (e) => {
     e.preventDefault();
@@ -24,6 +25,9 @@ export const Updatechild = ({ show, handleClose, childId }) => {
     formData.append("dob", dob);
     formData.append("age", age);
     formData.append("questions", questions);
+    if (image) {
+      formData.append("image", image); // Append the selected image file
+    }
 
     try {
       const response = await fetch(
@@ -36,7 +40,7 @@ export const Updatechild = ({ show, handleClose, childId }) => {
 
       if (response.ok) {
         console.log(response);
-        // Reset form fields
+        // Reset form fields and image
         setName("");
         setNickname("");
         setRelation("");
@@ -44,13 +48,13 @@ export const Updatechild = ({ show, handleClose, childId }) => {
         setDob("");
         setAge("");
         setQuestions("");
+        setImage(null);
         handleClose();
       }
     } catch (error) {
       console.log("Error:", error);
     }
   };
-
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -109,6 +113,14 @@ export const Updatechild = ({ show, handleClose, childId }) => {
             <Form.Control
               type="text"
               onChange={(e) => setQuestions(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Image</Form.Label>
+            <Form.Control
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files[0])} 
             />
           </Form.Group>
         </Form>

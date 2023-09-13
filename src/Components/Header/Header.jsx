@@ -100,6 +100,16 @@ const Header = () => {
               Steps
             </a>
           </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/survey">
+              Survey
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/intro-page">
+              Intro's
+            </a>
+          </li>
         </ul>
       </div>
     </nav>

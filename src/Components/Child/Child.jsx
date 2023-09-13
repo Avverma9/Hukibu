@@ -91,7 +91,11 @@ export const Child = () => {
 
                   <td>{ch.age}</td>
                   <td>{ch.set_of_questions}</td>
-                  <td><img src={`http://139.59.68.139:3000/uploads/${ch.image}`} alt="" /></td>
+                  <td>  <img
+                    src={`http://139.59.68.139:3000/uploads/${ch.image}`}
+                    alt=""
+                    style={{ maxWidth: "100px", maxHeight: "100px" }}
+                  /> </td>
                   <td>{ch.createdAt.substring(0,10)}</td>
                   <td>
                     {<AiOutlineEdit onClick={() => childEditHandler(ch.id)} />} 

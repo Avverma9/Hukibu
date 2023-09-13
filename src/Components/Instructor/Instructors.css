@@ -1,0 +1,159 @@
+/* Instructors.css */
+
+.instructors-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .instructor-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+  }
+  
+  .instructor-card img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  
+  .delete-button,
+  .update-button {
+    margin-top: 10px;
+  }
+  
+  .form-container {
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+  }
+  
+  .add-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+  }
+
+
+.update-form-container {
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 1100px;
+
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+  
+  .update-form-container input,
+  .update-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .update-form-container button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  /* Instructors.css */
+
+/* ... Existing CSS ... */
+
+.search-bar {
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+.delete-button {
+    margin-top: 10px;
+    cursor: pointer;
+   
+  }
+.update-button {
+  margin-left: 220px;
+  margin-top: 10px;
+  cursor: pointer;
+ 
+}
+
+/* Styles for forms */
+.form-container,
+.update-form-container {
+  border: 1px solid #ddd;
+  padding: 20px;
+  width: 1100px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.form-container input,
+.form-container textarea,
+.update-form-container input,
+.update-form-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form-container button,
+.update-form-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Search bar styles */
+.search-bar {
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+    margin-left: 570px;
+  width: 20%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.sticky-search {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 100;
+  }
