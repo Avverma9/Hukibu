@@ -1,7 +1,5 @@
 /* course.css */
 
-/* course.css */
-
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -17,35 +15,61 @@ body {
 
 h1 {
   margin-bottom: 20px;
+  color: #333;
+  font-size: 28px;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.input-data{
-  border: none;
+.card-container {
   display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
-th,
-td {
-  padding: 10px;
-  text-align: left;
-  
+.course-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: calc(50% - 20px); /* Two cards per row for smaller screens */
+  box-sizing: border-box;
 }
 
-th {
-  background-color: #f2f2f2;
+.course-card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
 }
 
-td img {
-  max-width: 100px;
-  max-height: 100px;
+.course-info h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.course-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.course-actions button {
+  background: transparent;
+  font-size: 20px;
+  font-weight: 800;
+  color: blue;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.course-actions button:hover {
+  color: darkblue;
 }
 
 .pagination {
@@ -55,145 +79,75 @@ td img {
 }
 
 .pagination button {
-  padding: 5px 10px;
+  padding: 10px 20px;
   border: none;
   background-color: #ffffff;
   color: rgb(236, 142, 142);
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 18px;
+  border-radius: 6px;
+  margin: 0 5px;
 }
 
 .pagination button.active {
   background-color: #000000;
+  color: #ffffff;
 }
 
 .pagination button:hover {
   background-color: #8f8989;
 }
 
-.update-form {
+/* Update Form Styles */
+
+.course-update-form {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   padding: 20px;
   margin-top: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.update-form h2 {
-  margin-bottom: 10px;
-}
-
-
-/* AddCourse.css */
-
-
-
-form {
+.course-update-form form {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  max-width: 85%;
-  margin: 0 auto;
+  flex-direction: column;
   gap: 10px;
 }
 
-label {
-  margin-top: 10px;
-  font-weight: bold;
-}
-/* Your existing CSS */
-
-.bold-text {
-  font-weight: bold;
-}
-
-input {
-  
-  padding: 4px;
-  margin-top: 5px;
+.course-update-form input,
+.course-update-form textarea {
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 16px;
 }
 
-button {
-  margin-top: 10px;
-  padding: 10px 15px;
+.course-update-form button {
+  margin-top: 20px;
+  padding: 12px 24px;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-}
-.backarrow-btn{
-  background: transparent;
-  font-size: 30px;
-  font-weight: 800;
-  color: blue;
-  
-}
-.add-btn{
-  background: transparent;
-  font-size: 30px;
-  font-weight: 800;
-  color: blue;
-  position: absolute;
-right: 10px;
-top: 60px;
-}
-.addcoarse-form{
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-.form-field{
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-}
-.form-field-a{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-.form-field-a label{
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-  margin-left: 150px;
-}
-.submit-btn{
-  background: transparent;
-  color: blue;
-  font-size: 30px;
+  font-size: 18px;
 }
 
-
-button:hover {
-  
-}
-.dlt-btn{
-  background: transparent;
-  color: red;
-  font-size: 25px;
-}
-.edit-btn{
-  background: transparent;
-  color: blue;
-  font-size: 25px;
-}
-.sub-btn-btn{
-  background: transparent;
-  color: blue;
-  font-weight: 700;
-  font-size: 25px;
-}
-.cross-btn{
+.course-update-form button.cross-btn {
   background: transparent;
   color: red;
   font-weight: 900;
   font-size: 25px;
 }
+.add-course-button {
+  margin-left: 650px;
+}
+/* Mobile Styles */
 
-
+@media screen and (max-width: 768px) {
+  .course-card {
+    width: 100%;
+  }
+}

@@ -1,87 +1,134 @@
-/* AddCourses.css */
-
 .addcoarse-form {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .form-field {
-    grid-column: span 2;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  .form-field-desc {
-    text-decoration: solid;
-    grid-column: span 2;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  .form-field-price {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  .form-field-what {
-    grid-column: span 2;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
-    margin-bottom: 20px;
-  }
-  
-  .form-field-video {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  .form-field-file {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  textarea {
-    resize: vertical;
-  }
-  
-  button {
-    display: flex;
-    align-items: center;
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
 
-  button svg {
-    margin-right: 5px;
-  }
+.form-field {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-field-desc {
+  text-decoration: solid;
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-field-price {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-field-what {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.form-field-video {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-field-file {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button svg {
+  margin-right: 5px;
+}
+
+.backarrow-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
   
+}
+
+.backarrow-btn svg {
+  margin-right: 5px;
+}
+
+.backarrow-btn:hover {
+  background-color: #0056b3;
+}
+
+.backarrow-btn:active,
+.backarrow-btn:focus {
+  outline: none;
+}
+
+.add-btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  margin-left: 400px;
+}
+
+.add-btn svg {
+  margin-right: 5px;
+}
+
+.add-btn:hover {
+  background-color: #1f8c32;
+}
+
+.add-btn:active,
+.add-btn:focus {
+  outline: none;
+}

@@ -29,6 +29,8 @@ export const Child = () => {
 
   const childDeleteHandler = async (chId) => {
     try {
+      const confirmed = window.confirm("Are sure you want to delete this child ?")
+      if(confirmed){
       const response = await fetch(
         `http://139.59.68.139:3000/admin-deleteChildByChildId/${chId}`,
         {
@@ -39,7 +41,7 @@ export const Child = () => {
       if (response.ok) {
         console.log(response);
         fetchChilddata();
-      }
+      }  }
     } catch (error) {
       console.log("Error:", error);
     }
@@ -59,61 +61,39 @@ export const Child = () => {
       <Updatechild show={show} handleClose={handleClose} childId={childId} />
       <div className="container mt-5">
         <h2>Child Management</h2>
-      <div><p className="welcome-text-child">Welcome to Child Management !</p></div>
-      <div><p className="welcome-text-child2">Here You can manage users child </p></div>
-        {childData.length > 0 ? (
-          <table className="table table-bordered">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Child Name</th>
-                <th>Nickname</th>
-                <th>Relation</th>
-                <th>Gender</th>
-                <th>DOB</th>
-                <th>Age</th>
-                <th>Questions</th>
-                <th>Image</th>
-                <th>Enrollment date</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {childData.map((ch) => (
-                <tr key={ch.id}>
-                  <td>{ch.id}</td>
-                  <td>{ch.name}</td>
-                  <td>{ch.nickname}</td>
-                  <td>{ch.relation}</td>
-                  <td>{ch.gender}</td>
-                  <td>{ch.dob.substring(0, 10)}</td>
-
-                  <td>{ch.age}</td>
-                  <td>{ch.set_of_questions}</td>
-                  <td>  <img
+        <div><p className="welcome-text-child">Welcome to Child Management !</p></div>
+        <div><p className="welcome-text-child2">Here You can manage users child </p></div>
+        <div className="row">
+          {childData.length > 0 ? (
+            childData.map((ch) => (
+              <div className="col-md-4 mb-4" key={ch.id}>
+                <div className="card">
+                  <img
                     src={`http://139.59.68.139:3000/uploads/${ch.image}`}
+                    className="card-img-top"
                     alt=""
-                    style={{ maxWidth: "100px", maxHeight: "100px" }}
-                  /> </td>
-                  <td>{ch.createdAt.substring(0,10)}</td>
-                  <td>
-                    {<AiOutlineEdit onClick={() => childEditHandler(ch.id)} />} 
-                  </td>
-                  <td>
-                    {
-                      <AiOutlineDelete
-                        onClick={() => childDeleteHandler(ch.id)}
-                      />
-                    }
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>No data available</p>
-        )}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">Child Name: {ch.name}</h5>
+                    <p className="card-text">Nickname: {ch.nickname}</p>
+                    <p className="card-text">Relation: {ch.relation}</p>
+                    <p className="card-text">Gender: {ch.gender}</p>
+                    <p className="card-text">DOB: {ch.dob.substring(0, 10)}</p>
+                    <p className="card-text">Age: {ch.age}</p>
+                    <p className="card-text">Questions: {ch.set_of_questions}</p>
+                    <p className="card-text">Enrollment date: {ch.createdAt.substring(0, 10)}</p>
+                    <div className="d-flex justify-content-between">
+                      <AiOutlineEdit onClick={() => childEditHandler(ch.id)} />
+                      <AiOutlineDelete onClick={() => childDeleteHandler(ch.id)} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No data available</p>
+          )}
+        </div>
       </div>
     </>
   );

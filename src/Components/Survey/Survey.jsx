@@ -40,6 +40,9 @@ const Survey = () => {
   };
 
   const handleDeleteSurveyItem = () => {
+    // const confirmed = window.confirm("Are sure want to delete this survery ?")
+    // if(confirmed){
+
     fetch(`http://139.59.68.139:3000/admin-delete-survey/${deletingItemId}`, {
       method: "GET",
     })
@@ -51,7 +54,7 @@ const Survey = () => {
       })
       .catch((error) => console.error("Error deleting survey item:", error));
   };
-
+  
   const handleAddModalOpen = () => {
     setShowAddModal(true);
   };

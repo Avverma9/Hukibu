@@ -1,62 +1,47 @@
-
-.welcome-image img{
-    width: 700px;
-    margin-left: 400px;
+/* Default styles for larger screens */
+.welcome-image {
+  text-align: center;
+  padding: 20px;
 }
 
-.welcome-image p{
-    font-size: 25px;
+.welcome-image img {
+  max-width: 100%;
+  height: auto;
 }
+
+.welcome-text-admin {
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.lets-go-button {
+  margin-top: 20px;
+  font-size: large;
+  color: black;
+}
+
+.lets-go-button a{
   
-.lets-go-button a {
-    text-decoration: none;
-    color: white;
-  }
-  
-.welcome-text {
-    position: absolute;
-    top: 50%;
-    left: 70%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-    font-weight: bold;
-    opacity: 0;
-    animation: fadeAndSlide 2s forwards;
-  }
+  font-size: large;
+  color: black;
+}
+
+
+/* Media query for screens with a maximum width of 768px (typical for mobile devices) */
+@media (max-width: 768px) {
   .welcome-text-admin {
-    position: absolute;
-    top: 50%;
-    left: 70%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-    font-weight: bold;
-    opacity: 0;
-    animation: fadeAndSlide 2s forwards;
+    font-size: 18px; /* Decrease font size for smaller screens */
   }
-  
-  @keyframes fadeAndSlide {
-    0% {
-      transform: translate(-70%, -90%) translateY(-20px);
-      opacity: 0;
-    }
-    100% {
-      transform: translate(-50%, -50%);
-      opacity: 1;
-    }
-  }
-  
+
   .lets-go-button {
-    margin-left: 1000px;
-    font-size: 18px;
-    padding: 10px 20px;
-    background-color: #000000;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Reduce margin-top for smaller screens */
+    font-size: large;
+    color: black;
+  }
+  .lets-go-button a{
+  
+    font-size: large;
+    color: black;
   }
   
-  .lets-go-button:hover {
-    background-color: #eb15ff;
-  }
+}

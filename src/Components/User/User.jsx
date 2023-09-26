@@ -127,7 +127,6 @@ const User = () => {
       const responseData = await response.json();
 
       if (response.ok) {
-        window.location.reload();
         setUserData((prevUserData) =>
           prevUserData.filter((user) => user.id !== deleteUserId)
         );
@@ -156,49 +155,36 @@ const User = () => {
       </div>
       <h2 className="mb-3">User Management</h2>
       {userData.length > 0 ? (
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th>User ID</th>
-              <th>Full Name</th>
-              <th>Mobile</th>
-              <th>Email</th>
-              <th>Profile Image</th>
-
-              <th>Edit/View</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {userData.map((user) => (
-              <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.name || "N/A"}</td>
-                <td>{user.mobile}</td>
-                <td>{user.email || "N/A"}</td>
-                <td>
-                  <img
-                    src={`http://139.59.68.139:3000/uploads/${user.image}`}
-                    alt=""
-                  />
-                </td>
-
-                <td>
-                  <AiOutlineEdit onClick={() => handleEditModalOpen(user)} />
-                </td>
-                <td>
-                  <AiOutlineDelete
-                    onClick={() => handleDeleteModalOpen(user.id)}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="row">
+          {userData.map((user) => (
+            <div key={user.id} className="col-md-4 mb-3">
+              <div className="user-card">
+                <h3>{user.name || "N/A"}</h3>
+                <p>
+                  <strong>Mobile:</strong> {user.mobile}
+                </p>
+                <p>
+                  <strong>Email:</strong> {user.email || "N/A"}
+                </p>
+                <img
+                  src={`http://139.59.68.139:3000/uploads/${user.image}`}
+                  alt=""
+                />
+                <div className="user-actions">
+                  <button onClick={() => handleEditModalOpen(user)}>
+                    <AiOutlineEdit /> View & update
+                  </button>
+                  <button onClick={() => handleDeleteModalOpen(user.id)}>
+                    <AiOutlineDelete />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       ) : (
         <p>No data available</p>
       )}
-
       {/* edit  */}
       <Modal
         show={editModalShow}

@@ -25,6 +25,8 @@ const Instructors = () => {
   }, []);
 
   const handleDelete = async (id) => {
+    const confirmed = window.confirm("Are you sure you want to delete this instructor ?")
+    if(confirmed){
     const response = await fetch(
       `http://139.59.68.139:3000/admin-deleteinstructorById/${id}`,
       {
@@ -32,11 +34,12 @@ const Instructors = () => {
       }
     );
     if (response.ok) {
-      alert("Data deleted");
+      alert("Instructor deleted");
       const newData = data.filter((instructor) => instructor.id !== id);
       setData(newData);
     }
   };
+}
 
   const handleSubmit = async (e) => {
     e.preventDefault();

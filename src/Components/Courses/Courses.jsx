@@ -26,8 +26,13 @@ const Courses = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  // delete
-  const handleDeleteUser = async (id) => {
+
+// delete
+const handleDeleteUser = async (id) => {
+
+  const confirmed = window.confirm("Are you sure you want to delete this course?");
+
+  if (confirmed) {
     const response = await fetch(
       `http://139.59.68.139:3000/admin-deleteCourseById/${id}`,
       {
@@ -38,9 +43,12 @@ const Courses = () => {
     const responseData = await response.json();
 
     if (response.ok) {
-      window.location.reload();
+      alert("successfully deleted !")
+      const deletedData= data.filter(course=>course.id !== id)
+      setData(deletedData)
     }
-  };
+  }
+};
 
   const handleUpdateClick = (course) => {
     setUpdatedCourseName(course.courseName);
@@ -114,103 +122,94 @@ const Courses = () => {
   const endIndex = startIndex + itemsPerPage;
 
   const currentItems = data.slice(startIndex, endIndex);
-
   return (
     <>
       <div>
-       {showUpdateForm && (
-              <tr className="input-field-container">
-                <td className="input-data" colSpan="7">
-                  <form className="input-form-data" onSubmit={(e) => handleUpdateSubmit(e)}>
-                    <input
-                      type="text"
-                      placeholder="Enter course name"
-                      name="courseName"
-                      defaultValue={updatedCourseName}
-                    />
-                    <textarea
-                      type="text"
-                      placeholder="Enter course description"
-                      name="courseDesc"
-                      defaultValue={updatedCourseDesc}
-                    />
-                    <input
-                      type="text"
-                      placeholder="What you get"
-                      name="whatYouGet"
-                      defaultValue={updatedWhatYouGet}
-                    />
-                    <input
-                      type="text"
-                      placeholder="Price"
-                      name="price"
-                      defaultValue={updatedPrice}
-                    />
-                    <input
-                      type="file"
-                      placeholder="Image"
-                      name="image"
-                      defaultValue={updatedImage}
-                    />
-                     <input
-                      type="text"
-                      placeholder="Enter your content link"
-                      name="youtubelink"
-                      defaultValue={youtubelink}
-                    />
-                    <button className="sub-btn-btn" type="submit"><CiLocationArrow1/></button>
-                    <button className="cross-btn" onClick={() => setShowUpdateForm(false)}>
-                      <RxCross2/>
-                    </button>
-                  </form>
-                </td>
-              </tr>
-            )}
+        {showUpdateForm && (
+          <div className="input-field-container">
+            <div className="course-update-form">
+              <form className="input-form-data" onSubmit={(e) => handleUpdateSubmit(e)}>
+                <input
+                  type="text"
+                  placeholder="Enter course name"
+                  name="courseName"
+                  defaultValue={updatedCourseName}
+                />
+                <textarea
+                  type="text"
+                  placeholder="Enter course description"
+                  name="courseDesc"
+                  defaultValue={updatedCourseDesc}
+                />
+                <input
+                  type="text"
+                  placeholder="What you get"
+                  name="whatYouGet"
+                  defaultValue={updatedWhatYouGet}
+                />
+                <input
+                  type="text"
+                  placeholder="Price"
+                  name="price"
+                  defaultValue={updatedPrice}
+                />
+                <input
+                  type="file"
+                  name="image"
+                />
+                <input
+                  type="text"
+                  placeholder="Enter your content link"
+                  name="youtubelink"
+                  defaultValue={youtubelink}
+                />
+                <button className="sub-btn-btn" type="submit">
+                  <CiLocationArrow1 />
+                </button>
+                <button className="cross-btn" onClick={() => setShowUpdateForm(false)}>
+                  <RxCross2 />
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
         <h1>Course List</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Course Name</th>
-              <th>Course Description</th>
-              <th>Price</th>
-              <th>What You Get</th>
-              <th>Image</th>
-              <th>Content</th>
-              <th>Added at</th>
-              <th>Delete</th>
-              <th>Update</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.map((e) => (
-              <tr key={e.id}>
-                <td>{e.id}</td>
-                <td>{e.courseName}</td>
-                <td className="bold-text">{e.courseDesc}</td>
-
-                <td>{e.price}</td>
-                <td>{e.whatYouGet}</td>
-                <td>
-                  <img
-                    src={`http://139.59.68.139:3000/uploads/${e.images}`}
-                    alt=""
-                    style={{ maxWidth: "100px", maxHeight: "100px" }}
-                  />
-                </td>
-                <td>{e.youtubelink}</td>
-<td>{e.createdAt.substring(0,10)}</td>
-                <td>
-                  <button className="dlt-btn" onClick={() => handleDeleteUser(e.id)}><AiOutlineDelete/></button>
-                </td>
-                <td>
-                  <button className="edit-btn" onClick={() => handleUpdateClick(e)}><AiOutlineEdit color="blue"/></button>
-                </td>
-              </tr>
-            ))}
-           
-          </tbody>
-        </table>
+       <button className="add-course-button">
+        <a href="/add-courses" style={{ textDecoration: "none", color: "white" }}>
+        Add courses
+        </a></button> 
+  
+        <div className="card-container">
+          {currentItems.map((e) => (
+            <div key={e.id} className="course-card">
+              <div className="course-info">
+                <h2>{e.courseName}</h2>
+                <p className="bold-text">{e.courseDesc}</p>
+                <p>Price: {e.price}</p>
+                <p>What You Get: {e.whatYouGet}</p>
+                <p>Added at: {e.createdAt.substring(0, 10)}</p>
+                <a href={e.youtubelink} target="_blank" rel="noopener noreferrer">
+                  Watch on YouTube <CiLocationArrow1 />
+                </a>
+              </div>
+              <div className="course-image">
+                <img
+                  src={`http://139.59.68.139:3000/uploads/${e.images}`}
+                  alt=""
+                  style={{ maxWidth: "100px", maxHeight: "100px" }}
+                />
+              </div>
+              <div className="course-actions">
+                <button className="dlt-btn" onClick={() => handleDeleteUser(e.id)}>
+                  <AiOutlineDelete />
+                </button>
+                <button className="edit-btn" onClick={() => handleUpdateClick(e)}>
+                  <AiOutlineEdit color="blue" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
         <div className="pagination">
           <button onClick={handlePrevClick}>&lt; Prev</button>
           {Array.from({ length: totalPages }).map((_, index) => (
@@ -225,17 +224,10 @@ const Courses = () => {
           <button onClick={handleNextClick}>Next &gt;</button>
         </div>
       </div>
-      {/* <button href="/add-courses" color="black">Add Courses </button> */}
-      <button>
-        <a
-          href="/add-courses"
-          style={{ textDecoration: "none", color: "white" }}
-        >
-          Add courses
-        </a>
-      </button>
+    
     </>
   );
+  
 };
 
 export default Courses;
